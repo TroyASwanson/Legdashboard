@@ -1,0 +1,18 @@
+[
+{"id":"il-1","level":"Illinois","rank":1,"name":"Community College Funding Ramp","description":"New legislation ramping up state funding for community colleges.","colleges":"All 14 colleges: City Colleges (District 508) and the 7 suburban districts","bills":[],"billNote":"New bill expected in 2027"},
+{"id":"il-2","level":"Illinois","rank":2,"name":"City Colleges Elected Board","description":"An elected board for City Colleges with 10 districts aligned to the CPS board districts.","colleges":"City Colleges (District 508) only","bills":["SB1693"],"billNote":"10-district bill expected in 2027"},
+{"id":"il-3","level":"Illinois","rank":3,"name":"Academic Freedom","description":"Academic freedom language in Illinois statute.","colleges":"All 14 colleges","bills":["SB2202"],"billNote":""},
+{"id":"il-4","level":"Illinois","rank":4,"name":"AI Regulation","description":"\"Human-in-the-loop\" requirements for AI.","colleges":"All 14 colleges; effect depends on bill text","bills":["HB4980","HB3567"],"billNote":""},
+{"id":"il-5","level":"Illinois","rank":5,"name":"OR Safety","description":"Surgical technologists must come from licensed training programs.","colleges":"Colleges with surgical technology programs","bills":["HB1598"],"billNote":""},
+{"id":"il-6","level":"Illinois","rank":6,"name":"OER Funding Grants","description":"Grants for open educational resources.","colleges":"All 14 colleges","bills":["HB3411","SB4067"],"billNote":""},
+{"id":"il-7","level":"Illinois","rank":7,"name":"iCivics Program","description":"A civics education program for high schools and community colleges.","colleges":"All 14 colleges","bills":[],"billNote":"New bill expected"},
+{"id":"il-8","level":"Illinois","rank":8,"name":"E-book Legislation","description":"Limits on publisher restrictions when libraries license e-books, digital audiobooks and other electronic materials.","colleges":"All 14 college libraries","bills":["HB5236","HB5279"],"billNote":""},
+{"id":"il-9","level":"Illinois","rank":9,"name":"Unemployment Strike Benefits","description":"Striking workers can file for unemployment after 2 weeks.","colleges":"All 14 colleges; all bargaining units","bills":["HB2565"],"billNote":""},
+{"id":"fed-1","level":"Federal","rank":1,"name":"Student Aid","description":"Federal student aid programs and loans.","colleges":"All 14 colleges","bills":["H.R. 7148","S. 5767"],"billNote":""},
+{"id":"fed-2","level":"Federal","rank":2,"name":"Pell Grants","description":"Pell funding, maximum award and eligibility.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""},
+{"id":"fed-3","level":"Federal","rank":3,"name":"TRIO Grants","description":"TRIO program funding and grants.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""},
+{"id":"fed-4","level":"Federal","rank":4,"name":"Workforce Grants","description":"Federal workforce training grants.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""},
+{"id":"fed-5","level":"Federal","rank":5,"name":"AI Federal Regulation","description":"Federal rules on AI, including any preemption of state AI laws.","colleges":"All 14 colleges","bills":["S. 4214","H.R. 9442","S. 5493","H.R. 10538"],"billNote":"Great American AI Act discussion draft has no number yet"},
+{"id":"fed-6","level":"Federal","rank":6,"name":"AI Token Tax","description":"Proposals for a federal tax on AI usage (tokens).","colleges":"All 14 colleges","bills":["H.R. 10044","S. 5518"],"billNote":""},
+{"id":"fed-7","level":"Federal","rank":7,"name":"Higher Education Policy Overview","description":"General federal higher-ed policy, including Department of Education actions.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""}
+]

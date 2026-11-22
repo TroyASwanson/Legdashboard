@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legislative Dashboard · CCCTU Local 1600</title>
+<meta name="description" content="Automated list of news, reports, press releases and bill updates on Cook County College Teachers Union Local 1600's legislative topics.">
+<link rel="icon" href="assets/ccctu-seal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Quiet civic look: white surfaces on a warm-gray ground, near-black ink, one red accent. Phone first; grid of topic cards and a two-column topic page on wider screens. */
+:root{
+  --ground:#F4F3F2; --surface:#FFFFFF; --ink:#17171A; --muted:#5E5A58; --rule:#E2DFDD; --chip:#CFCBC8;
+  --accent:#B3121F; --accent-soft:#FBEAEB;
+  --font:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font:16px/1.5 var(--font);-webkit-text-size-adjust:100%}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+@media (min-width:700px){.wrap{padding:0 24px}}
+.notice{background:var(--ink);color:#fff;font-size:14px;line-height:1.45}
+.notice .wrap{padding-top:10px;padding-bottom:10px}
+@media (min-width:700px){.notice .wrap{text-align:center}}
+header.mast{background:var(--surface);border-bottom:3px solid var(--accent)}
+header.mast .wrap{padding-top:16px;padding-bottom:16px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{width:60px;height:60px;flex:none;display:block}
+@media (min-width:700px){.brand img{width:84px;height:84px}}
+.brand small{display:block;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.brand strong{display:block;font-size:26px;line-height:1.1;font-weight:800;letter-spacing:-.01em}
+@media (min-width:700px){.brand strong{font-size:34px}.brand small{font-size:14px}}
+nav.pages{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center;font-weight:600}
+nav.pages a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+nav.pages a[aria-current="page"]{color:var(--accent)}
+.updated{font-size:14px;color:var(--muted);font-weight:400}
+main{padding:16px 0 32px}
+@media (min-width:700px){main{padding:24px 0 40px}}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2,h3{text-wrap:balance}
+.toolbar{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--surface);width:100%;max-width:340px}
+.tabs a{min-height:46px;display:flex;align-items:center;justify-content:center;font-weight:700;text-decoration:none}
+.tabs a[aria-current="page"]{background:var(--ink);color:#fff}
+.weekly{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;align-items:start}
+@media (max-width:400px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+@media (min-width:700px){.card{padding:18px}}
+.card-head{display:flex;gap:12px;align-items:baseline}
+.rank{font-size:26px;font-weight:800;color:var(--accent);min-width:22px;font-variant-numeric:tabular-nums}
+.card h2{margin:0;font-size:20px;line-height:1.2}
+.card h2 a{text-decoration:none}
+.meta{font-size:14px;color:var(--muted)}
+.newpill{font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:2px 10px;white-space:nowrap;margin-left:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.bill{font-size:14px;font-weight:600;padding:2px 10px;border-radius:6px;border:1.5px solid var(--chip);background:var(--surface)}
+.bill.new,.bill.expected{color:var(--accent);border-color:var(--accent)}
+.bill.none{background:var(--ground);border-color:var(--ground);color:var(--muted)}
+.latest{list-style:none;margin:0;padding:10px 0 0;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:10px}
+.latest a{font-weight:600;line-height:1.35}
+.empty-line{font-size:14px;color:var(--muted);border-top:1px solid var(--rule);padding-top:10px;margin:0}
+.more{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;font-weight:700;text-decoration:none}
+.more span{margin-left:6px;color:var(--accent)}
+/* topic page */
+.back{min-height:44px;display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none}
+.back span{color:var(--accent)}
+.topic-head{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.topic-head h1{margin:0;font-size:30px;line-height:1.1;font-weight:800;letter-spacing:-.01em}
+@media (min-width:700px){.topic-head h1{font-size:36px}}
+.topic-head p{margin:0;max-width:65ch}
+.cols{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.side{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.feed{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.billcard{background:var(--surface);border:1.5px solid var(--ink);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.billcard .top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.billcard .num{font-size:18px;font-weight:800}
+.status{font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;background:var(--ground);border:1px solid var(--chip);text-align:right}
+.status.enacted{background:var(--ink);color:#fff;border-color:var(--ink)}
+.status.new{color:var(--accent);border-color:var(--accent);background:var(--surface)}
+.note-box{border:1.5px dashed var(--chip);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--muted)}
+form.filters{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+form.filters label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
+form.filters select,form.filters input[type=search]{min-height:44px;font:16px var(--font);padding:0 10px;border:1px solid var(--chip);border-radius:8px;background:var(--surface);color:var(--ink);width:100%}
+form.filters label.check{flex-direction:row;align-items:center;gap:10px;min-height:44px;font-size:16px;font-weight:500}
+form.filters input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.feed-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.item{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+@media (min-width:700px){.item{padding:18px 20px}}
+.item-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.item-top .date{margin-left:auto;font-size:14px;color:var(--muted)}
+.item h3{margin:0;font-size:18px;line-height:1.3}
+@media (min-width:700px){.item h3{font-size:19px}}
+.item .outlet{font-size:14px;font-weight:600;color:#3E3A38}
+.item p{margin:0;max-width:68ch}
+.kind{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1.5px solid var(--ink)}
+.kind.news{background:var(--ink);color:#fff}
+.kind.opinion{background:var(--surface);border-style:dashed}
+.kind.press{background:var(--surface);color:var(--accent);border-color:var(--accent)}
+.kind.official{background:var(--accent);color:#fff;border-color:var(--accent)}
+.kind.report{background:#E9E7E5;border-color:#8A8582}
+.kind.podcast{background:var(--surface)}
+.kind.web{background:var(--ground);border-color:#8A8582;border-style:dotted}
+.flag{font-size:13px;font-weight:600;color:var(--muted);display:inline-flex;align-items:center;gap:4px}
+.flag.local{color:var(--accent);font-weight:700}
+.tag{font-size:13px;padding:1px 9px;border-radius:999px;border:1px solid var(--chip);color:#3E3A38;text-decoration:none}
+a.tag:hover{border-color:var(--accent)}
+.empty{border:1.5px dashed var(--chip);border-radius:12px;padding:20px;color:var(--muted);background:var(--surface)}
+.prose{max-width:70ch;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:20px 22px}
+.prose h1{margin:0 0 8px;font-size:30px;line-height:1.15}
+.prose h2{font-size:20px;margin:22px 0 6px}
+.prose p,.prose li{margin:0 0 10px}
+.prose ul{padding-left:20px;margin:0 0 10px}
+footer{border-top:1px solid var(--rule);background:var(--surface)}
+footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="notice"><div class="wrap">This dashboard is the result of an automated search. Sources are not approved or endorsed by CCCTU Local 1600.</div></div>
+<header class="mast"><div class="wrap">
+  <a class="brand" href="#/">
+    <img src="assets/ccctu-seal.png" alt="Cook County College Teachers Union, AFT Local 1600, AFL-CIO seal" width="84" height="84">
+    <span><small>Cook County College Teachers Union · AFT-IFT Local 1600</small><strong>Legislative Dashboard</strong></span>
+  </a>
+  <nav class="pages" aria-label="Pages">
+    <a href="#/" data-nav="home">Topics</a>
+    <a href="#/sources" data-nav="sources">All sources</a>
+    <a href="#/archive" data-nav="archive">Archive</a>
+    <a href="#/about" data-nav="about">About</a>
+    <span class="updated" id="updated">Loading…</span>
+  </nav>
+</div></header>
+
+<main class="wrap" id="app" tabindex="-1"><p class="meta">Loading the dashboard…</p></main>
+
+<footer><div class="wrap">
+  <span>This dashboard is the result of an automated search. Sources are not approved or endorsed by CCCTU Local 1600.</span>
+  <span id="foot-updated"></span>
+</div></footer>
+
+<script>
+(function(){
+"use strict";
+var COLLEGES=["Richard J. Daley College","Harold Washington College","Kennedy-King College","Malcolm X College","Olive-Harvey College","Harry S Truman College","Wilbur Wright College","Harper College","Moraine Valley Community College","Morton College","Oakton College","Prairie State College","South Suburban College","Triton College"];
+var TYPES=[["news report","News report","news"],["opinion or editorial","Opinion","opinion"],["press release","Press release","press"],["official statement","Official statement","official"],["government report","Government report","report"],["podcast episode","Podcast","podcast"],["new webpage","New webpage","web"],["webpage update","Webpage update","web"]];
+var TYPEMAP={};TYPES.forEach(function(t){TYPEMAP[t[0]]={label:t[1],cls:t[2]};});
+var D={topics:[],bills:[],items:[],meta:{}};
+var app=document.getElementById("app");
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function safeUrl(u){return /^https?:\/\//i.test(u||"")?u:"#";}
+function parseDay(s){if(!s)return null;var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);if(m)return new Date(+m[1],+m[2]-1,+m[3]);var t=Date.parse(s);return isNaN(t)?null:new Date(t);}
+function ageDays(s){var d=parseDay(s);if(!d)return Infinity;var now=new Date();now.setHours(0,0,0,0);return Math.round((now-d)/864e5);}
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtDay(s,withYear){var d=parseDay(s);if(!d)return "";var now=new Date();var y=withYear||d.getFullYear()!==now.getFullYear();return MON[d.getMonth()]+" "+d.getDate()+(y?", "+d.getFullYear():"");}
+function fmtStamp(s){var t=Date.parse(s);if(isNaN(t))return "";var d=new Date(t);var h=d.getHours(),m=d.getMinutes();var ap=h<12?"a.m.":"p.m.";h=h%12||12;return MON[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear()+", "+h+":"+(m<10?"0":"")+m+" "+ap;}
+function liveDays(){return D.meta.liveDays||28;}
+function isLive(it){return ageDays(it.pubDate)<liveDays();}
+function isNewWeek(it){return ageDays(it.pubDate)<=7;}
+function byDate(a,b){return (parseDay(b.pubDate)||0)-(parseDay(a.pubDate)||0)||((a.tier||3)-(b.tier||3));}
+function topic(id){for(var i=0;i<D.topics.length;i++)if(D.topics[i].id===id)return D.topics[i];return null;}
+function bill(num){for(var i=0;i<D.bills.length;i++)if(D.bills[i].number===num)return D.bills[i];return null;}
+function itemsFor(id){return D.items.filter(function(it){return (it.topics||[]).indexOf(id)>-1;});}
+
+function kindTag(t){var k=TYPEMAP[t]||{label:t||"Item",cls:"web"};return '<span class="kind '+k.cls+'">'+esc(k.label)+'</span>';}
+var LOCK='<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';
+function itemCard(it,showTopics){
+  var tags=[];
+  if(showTopics!==false)(it.topics||[]).forEach(function(id){var t=topic(id);if(t)tags.push('<a class="tag" href="#/topic/'+esc(id)+'">'+esc(t.name)+'</a>');});
+  (it.colleges||[]).forEach(function(c){tags.push('<span class="tag">'+esc(c==="statewide"?"Statewide":c)+'</span>');});
+  return '<article class="item"><div class="item-top">'+kindTag(it.itemType)+
+    (it.paywall?'<span class="flag">'+LOCK+'Paywall</span>':'')+
+    (it.mentionsLocal1600?'<span class="flag local">Mentions Local 1600</span>':'')+
+    '<span class="date">'+esc(fmtDay(it.pubDate,true))+'</span></div>'+
+    '<h3><a href="'+esc(safeUrl(it.url))+'" rel="noopener">'+esc(it.headline)+'</a></h3>'+
+    '<span class="outlet">'+esc(it.outlet)+'</span>'+
+    '<p>'+esc(it.summary)+'</p>'+
+    (tags.length?'<div class="chips">'+tags.join("")+'</div>':'')+'</article>';
+}
+
+/* filters shared by topic, sources and archive views */
+var F={type:"",college:"",range:"live",local:false,q:"",topic:""};
+function filterForm(opts){
+  var h='<form class="filters" onsubmit="return false"><h2 class="eyebrow">Filter sources</h2>';
+  if(opts.search)h+='<label for="f-q">Search<input id="f-q" type="search" value="'+esc(F.q)+'" placeholder="Headline, outlet or summary"></label>';
+  if(opts.topic){h+='<label for="f-topic">Topic<select id="f-topic"><option value="">All topics</option>';D.topics.forEach(function(t){h+='<option value="'+esc(t.id)+'"'+(F.topic===t.id?" selected":"")+'>'+(t.level==="Illinois"?"Illinois ":"Federal ")+t.rank+': '+esc(t.name)+'</option>';});h+='</select></label>';}
+  h+='<label for="f-type">Source type<select id="f-type"><option value="">All types</option>';TYPES.forEach(function(t){h+='<option value="'+esc(t[0])+'"'+(F.type===t[0]?" selected":"")+'>'+esc(t[1])+'</option>';});h+='</select></label>';
+  h+='<label for="f-college">College<select id="f-college"><option value="">All colleges</option><option value="statewide"'+(F.college==="statewide"?" selected":"")+'>Statewide</option>';COLLEGES.forEach(function(c){h+='<option'+(F.college===c?" selected":"")+'>'+esc(c)+'</option>';});h+='</select></label>';
+  if(opts.range)h+='<label for="f-range">Date range<select id="f-range"><option value="live"'+(F.range==="live"?" selected":"")+'>Last 4 weeks</option><option value="week"'+(F.range==="week"?" selected":"")+'>Last 7 days</option><option value="all"'+(F.range==="all"?" selected":"")+'>Include archive</option></select></label>';
+  h+='<label class="check" for="f-local"><input id="f-local" type="checkbox"'+(F.local?" checked":"")+'> Mentions Local 1600</label></form>';
+  return h;
+}
+function applyFilters(list,mode){
+  var q=F.q.trim().toLowerCase();
+  return list.filter(function(it){
+    if(mode==="archive"){if(isLive(it))return false;}
+    else if(F.range==="live"&&!isLive(it))return false;
+    else if(F.range==="week"&&!isNewWeek(it))return false;
+    if(F.type&&it.itemType!==F.type)return false;
+    if(F.college&&(it.colleges||[]).indexOf(F.college)<0)return false;
+    if(F.local&&!it.mentionsLocal1600)return false;
+    if(F.topic&&(it.topics||[]).indexOf(F.topic)<0)return false;
+    if(q&&[it.headline,it.outlet,it.summary].join(" ").toLowerCase().indexOf(q)<0)return false;
+    return true;
+  }).sort(byDate);
+}
+function bindFilters(rerender){
+  [["f-type","type"],["f-college","college"],["f-range","range"],["f-topic","topic"]].forEach(function(p){var el=document.getElementById(p[0]);if(el)el.addEventListener("change",function(){F[p[1]]=el.value;rerender();});});
+  var l=document.getElementById("f-local");if(l)l.addEventListener("change",function(){F.local=l.checked;rerender();});
+  var q=document.getElementById("f-q");if(q)q.addEventListener("input",function(){F.q=q.value;rerender();});
+}
+
+function viewHome(level){
+  var list=D.topics.filter(function(t){return t.level===level;}).sort(function(a,b){return a.rank-b.rank;});
+  var weekItems=D.items.filter(function(it){return isNewWeek(it)&&(it.topics||[]).some(function(id){var t=topic(id);return t&&t.level===level;});});
+  var weekTopics={};weekItems.forEach(function(it){(it.topics||[]).forEach(function(id){var t=topic(id);if(t&&t.level===level)weekTopics[id]=1;});});
+  var nTopics=Object.keys(weekTopics).length;
+  var h='<h1 class="sr-only">'+esc(level)+' topics</h1><div class="toolbar"><nav class="tabs" aria-label="Level">'+
+    '<a href="#/illinois"'+(level==="Illinois"?' aria-current="page"':'')+'>Illinois</a>'+
+    '<a href="#/federal"'+(level==="Federal"?' aria-current="page"':'')+'>Federal</a></nav>'+
+    '<div class="weekly"><span class="dot" aria-hidden="true"></span><span><b>'+weekItems.length+' new this week</b> <span class="meta">across '+nTopics+' topic'+(nTopics===1?'':'s')+' · topics in priority order</span></span></div></div><div class="grid">';
+  list.forEach(function(t){
+    var its=itemsFor(t.id).filter(isLive).sort(byDate);
+    var nw=its.filter(isNewWeek).length;
+    var chips=(t.bills||[]).map(function(n){var b=bill(n);return '<span class="bill'+(b&&b.isNew?' new':'')+'">'+(b&&b.isNew?'New: ':'')+esc(n)+'</span>';});
+    if(!chips.length)chips.push('<span class="bill none">No 2026 bill</span>');
+    if(t.billNote)chips.push('<span class="bill expected">'+esc(t.billNote)+'</span>');
+    h+='<article class="card"><div class="card-head"><span class="rank">'+t.rank+'</span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><h2><a href="#/topic/'+esc(t.id)+'">'+esc(t.name)+'</a></h2><span class="meta">'+esc(t.colleges)+'</span></div>'+(nw?'<span class="newpill">'+nw+' new</span>':'')+'</div>'+
+      '<div class="chips">'+chips.join("")+'</div>'+
+      (its.length?'<ul class="latest">'+its.slice(0,2).map(function(it){return '<li><a href="'+esc(safeUrl(it.url))+'" rel="noopener">'+esc(it.headline)+'</a><div class="meta">'+esc(it.outlet)+' · '+esc(fmtDay(it.pubDate))+'</div></li>';}).join("")+'</ul>':'<p class="empty-line">No sources found in the last 4 weeks.</p>')+
+      '<a class="more" href="#/topic/'+esc(t.id)+'">Open topic'+(its.length>2?' ('+its.length+' items)':'')+'<span aria-hidden="true">→</span></a></article>';
+  });
+  return h+'</div>';
+}
+
+function viewTopic(id){
+  var t=topic(id);
+  if(!t)return '<div class="empty">That topic was not found. <a href="#/">Back to all topics</a>.</div>';
+  F.topic="";
+  var bills=(t.bills||[]).map(bill).filter(Boolean);
+  var h='<a class="back" href="#/'+(t.level==="Illinois"?"illinois":"federal")+'"><span aria-hidden="true">←</span>'+esc(t.level)+' topics</a>'+
+    '<div class="topic-head"><p class="eyebrow">'+esc(t.level)+' · Priority '+t.rank+'</p><h1>'+esc(t.name)+'</h1><p>'+esc(t.description)+'</p><span class="meta">Colleges affected: '+esc(t.colleges)+'</span></div>'+
+    '<div class="cols"><aside class="side"><section aria-labelledby="bills-h" style="display:flex;flex-direction:column;gap:10px"><h2 id="bills-h" class="eyebrow">Bills</h2>';
+  bills.forEach(function(b){
+    var cls=/enacted/i.test(b.status)?" enacted":(b.isNew?" new":"");
+    h+='<article class="billcard"><div class="top"><span class="num">'+esc(b.number)+'</span><span class="status'+cls+'">'+esc(b.isNew?"New · "+b.status:b.status)+'</span></div>'+
+      '<span style="font-weight:600">'+esc(b.title)+'</span>'+
+      '<span class="meta">Last action'+(b.lastActionDate?' ('+esc(fmtDay(b.lastActionDate,true))+')':'')+': '+esc(b.lastAction)+'</span>'+
+      '<span class="meta">'+esc(b.session)+'</span>'+
+      '<a href="'+esc(safeUrl(b.url))+'" rel="noopener" style="font-weight:700;min-height:36px;display:inline-flex;align-items:center">Official bill page</a></article>';
+  });
+  if(!bills.length)h+='<div class="note-box">No 2026 bill for this topic.</div>';
+  if(t.billNote)h+='<div class="note-box">'+esc(t.billNote)+'.</div>';
+  h+='</section>'+filterForm({range:true})+'</aside><section class="feed" aria-labelledby="src-h"><div class="feed-head"><h2 id="src-h" class="eyebrow">Sources · newest first</h2><span class="meta" id="count"></span></div><div id="list" style="display:flex;flex-direction:column;gap:12px"></div></section></div>';
+  app.innerHTML=h;
+  function render(){
+    var list=applyFilters(itemsFor(id));
+    document.getElementById("count").textContent=list.length+" item"+(list.length===1?"":"s");
+    document.getElementById("list").innerHTML=list.length?list.map(function(it){return itemCard(it,false);}).join(""):'<div class="empty">No sources match these filters.</div>';
+  }
+  bindFilters(render);render();
+  return null;
+}
+
+function viewList(mode){
+  var title=mode==="archive"?"Archive":"All sources";
+  var intro=mode==="archive"?"Items four weeks old or older. They stay searchable here.":"Everything found in the last four weeks, across all topics, newest first.";
+  app.innerHTML='<div class="topic-head"><h1>'+title+'</h1><p>'+intro+'</p></div><div class="cols"><aside class="side">'+filterForm({search:true,topic:true,range:mode!=="archive"})+'</aside><section class="feed" aria-labelledby="src-h"><div class="feed-head"><h2 id="src-h" class="eyebrow">'+(mode==="archive"?"Archived items":"Sources")+'</h2><span class="meta" id="count"></span></div><div id="list" style="display:flex;flex-direction:column;gap:12px"></div></section></div>';
+  function render(){
+    var list=applyFilters(D.items,mode);
+    document.getElementById("count").textContent=list.length+" item"+(list.length===1?"":"s");
+    document.getElementById("list").innerHTML=list.length?list.map(function(it){return itemCard(it,true);}).join(""):'<div class="empty">'+(mode==="archive"&&!D.items.some(function(it){return !isLive(it);})?"Nothing has been archived yet. Items move here after four weeks.":"No sources match these filters.")+'</div>';
+  }
+  bindFilters(render);render();
+  return null;
+}
+
+function viewAbout(){
+  return '<article class="prose"><h1>About this dashboard</h1>'+
+  '<p>This dashboard is the result of an automated search. Sources are not approved or endorsed by CCCTU Local 1600.</p>'+
+  '<h2>What it is</h2><p>An automated list of information sources on Local 1600’s legislative topics: news, podcasts, government reports, press releases and changes to key webpages. Topics are listed in the Legislative Chair’s priority order, split into Illinois and federal, and every item is linked to the topic it concerns.</p>'+
+  '<h2>What it is not</h2><ul><li>Not a position statement. It catalogs sources and does not publish Local 1600’s positions.</li><li>Not a call to action. There are no action alerts or contact forms.</li><li>Not reviewed item by item. A scan runs every morning at about 8:30 a.m. Central and publishes what it finds automatically.</li><li>Not a news archive. Each item is a headline, outlet, date, link and a short original summary. Article text is never reproduced.</li></ul>'+
+  '<h2>How items are chosen</h2><p>The daily scan checks news outlets, government agencies and officials first, then union and partner organizations, then broader keyword searches. An item is published only if it substantively concerns a tracked topic, bill or named act. Items stay on the main pages for four weeks and then move to the <a href="#/archive">Archive</a>.</p>'+
+  '<h2>Sources checked</h2><p>Statehouse, Chicago, suburban and regional news (including Capitol News Illinois, WBEZ, WTTW, the Chicago Sun-Times, Chalkbeat Chicago, the Daily Herald, Journal &amp; Topics and local Patch editions); higher-education outlets; Illinois and federal agencies and officials; union and partner organizations; Illinois and Chicago podcasts; and official bill status records. Coverage includes all seven City Colleges and the seven suburban colleges.</p>'+
+  '<h2>Source labels</h2><p>Each item shows its kind first: news report, opinion, press release, official statement, government report, podcast, or webpage. Readers should judge a source by its kind.</p>'+
+  '<h2>Paywalls</h2><p>Some outlets (for example the Chicago Tribune, Crain’s, the Daily Herald and The Chronicle of Higher Education) require a subscription. Those items are marked <b>Paywall</b>. Use your own subscription or your college library’s access.</p></article>';
+}
+
+function setNav(key){document.querySelectorAll("nav.pages a").forEach(function(a){if(a.getAttribute("data-nav")===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});}
+var lastLevel="Illinois";
+function route(){
+  var h=(location.hash||"#/").replace(/^#\/?/,"");var parts=h.split("/");
+  var out=null;
+  if(parts[0]==="topic"&&parts[1]){var t=topic(parts[1]);if(t)lastLevel=t.level;setNav("home");out=viewTopic(parts[1]);document.title=(t?t.name+" · ":"")+"Legislative Dashboard · CCCTU Local 1600";}
+  else if(parts[0]==="sources"){setNav("sources");out=viewList("sources");document.title="All sources · Legislative Dashboard";}
+  else if(parts[0]==="archive"){setNav("archive");out=viewList("archive");document.title="Archive · Legislative Dashboard";}
+  else if(parts[0]==="about"){setNav("about");out=viewAbout();document.title="About · Legislative Dashboard";}
+  else{if(parts[0]==="federal")lastLevel="Federal";else if(parts[0]==="illinois")lastLevel="Illinois";setNav("home");out=viewHome(lastLevel);document.title="Legislative Dashboard · CCCTU Local 1600";}
+  if(out!==null)app.innerHTML=out;
+  if(window.__routed){window.scrollTo(0,0);app.focus({preventScroll:true});}
+  window.__routed=true;
+}
+
+function load(name){return fetch("data/"+name+".json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(name);return r.json();});}
+Promise.all([load("topics"),load("bills"),load("items"),load("meta")]).then(function(r){
+  D.topics=r[0];D.bills=r[1];D.items=r[2].filter(function(it){return !it.hidden;});D.meta=r[3]||{};
+  var stamp=D.meta.lastUpdated?fmtStamp(D.meta.lastUpdated):"";
+  document.getElementById("updated").textContent=stamp?"Updated "+stamp:"";
+  document.getElementById("foot-updated").textContent=stamp?"Last updated "+stamp:"";
+  window.addEventListener("hashchange",route);route();
+}).catch(function(){
+  document.getElementById("updated").textContent="";
+  app.innerHTML='<div class="empty">The dashboard data could not be loaded. Refresh the page to try again.</div>';
+});
+})();
+</script>
+</body>
+</html>
