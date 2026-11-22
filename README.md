@@ -26,3 +26,7 @@ The site is served by GitHub Pages from the `main` branch (Settings → Pages �
 ## Colleges and Local 1600 tabs
 
 `data/colleges.json` lists the 14 colleges plus the City Colleges of Chicago system, with official names, districts, locations and Local 1600 chapters. The daily scan reads it but never rewrites it; edit it by hand if a name or chapter changes. College and Local 1600 items live in `data/items.json` like every other item (tagged by `colleges` and `mentionsLocal1600`), and you hide them the same way.
+
+## Bills page
+
+`data/bills.json` holds each bill's status plus a plain-language `summary`, `changes` (amendments), `effect` (which colleges it applies to), `stage` (1 Introduced … 6 Law, shown as the progress bar), `nextStep` and `nextDate`. The daily scan keeps these current. `data/sessions.json` lists the legislative sessions for the Bills page's session selector, with each session's end date and a note on remaining session days; the scan adds a new session when the first bill of the 105th General Assembly or 120th Congress appears.

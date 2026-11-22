@@ -152,24 +152,39 @@ a.tag:hover{border-color:var(--accent)}
 .group-h:first-of-type{margin-top:4px}
 .facts{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;font-size:15px}
 .facts b{font-weight:700}
-/* bills page: a table on wide screens, stacked rows on phones */
-table.bills{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--rule);border-radius:12px;overflow:hidden;font-size:15px}
-table.bills th{text-align:left;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1.5px solid var(--ink)}
-table.bills td{padding:14px;border-bottom:1px solid var(--rule);vertical-align:top}
-table.bills tr:last-child td{border-bottom:0}
-table.bills .num{font-weight:800;font-size:17px;white-space:nowrap}
-table.bills tr.hit td{background:var(--accent-soft)}
-.wkpill{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;margin-top:4px;white-space:nowrap}
-@media (max-width:699px){
-  table.bills,table.bills tbody,table.bills tr,table.bills td{display:block;width:100%}
-  table.bills thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-  table.bills tr{border-bottom:1px solid var(--rule);padding:12px 0}
-  table.bills tr:last-child{border-bottom:0}
-  table.bills td{border:0;padding:3px 16px}
-  table.bills td[data-label]:not(.first)::before{content:attr(data-label) ": ";font-weight:700;font-size:13px;color:var(--muted)}
-}
 footer{border-top:1px solid var(--rule);background:var(--surface)}
 footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+/* bill progress and bill cards */
+.prog{display:flex;flex-direction:column;gap:4px;margin:2px 0}
+.prog-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.prog-bar span{height:8px;border-radius:2px;background:var(--rule)}
+.prog-bar span.done{background:var(--ink)}
+.prog-bar span.cur{background:var(--accent)}
+.prog-labels{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;font-size:11.5px;line-height:1.25;color:var(--muted)}
+.prog-labels span.cur{color:var(--accent);font-weight:700}
+.prog-now{font-size:13px;font-weight:700;color:var(--ink)}
+.prog-now span{font-weight:500;color:var(--muted)}
+@media (max-width:699px){.prog .prog-labels{display:none}}
+.prog.compact .prog-labels{display:none}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;align-items:start}
+@media (max-width:520px){.bgrid{grid-template-columns:1fr}}
+.bcard{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;scroll-margin-top:16px}
+.bcard.hit{border:2px solid var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.wkpill{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.bc-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bc-top .num{font-size:19px;font-weight:800;margin-right:4px}
+.bcard h3{margin:0;font-size:17px;line-height:1.3}
+.bc-dl{margin:0;display:grid;grid-template-columns:7.5em 1fr;gap:6px 12px;font-size:15px}
+.bc-dl dt{font-weight:700;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.bc-dl dd{margin:0}
+.bc-dl dd.next{font-weight:600}
+@media (max-width:420px){.bc-dl{grid-template-columns:1fr;gap:2px}.bc-dl dd{margin-bottom:6px}}
+.sessbar{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sessbar label{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.sessbar select{min-height:44px;font:16px var(--font);padding:0 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--surface);color:var(--ink)}
+.stagecounts{font-size:14px;color:var(--muted);margin:0 0 12px}
+.stagecounts b{color:var(--ink)}
+.billcard .nextline{font-size:14px;font-weight:600}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -218,7 +233,7 @@ footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--mut
 var COLLEGES=["City Colleges of Chicago","Richard J. Daley College","Harold Washington College","Kennedy-King College","Malcolm X College","Olive-Harvey College","Harry S Truman College","Wilbur Wright College","Harper College","Moraine Valley Community College","Morton College","Oakton College","Prairie State College","South Suburban College","Triton College"];
 var TYPES=[["news report","News report","news"],["opinion or editorial","Opinion","opinion"],["press release","Press release","press"],["official statement","Official statement","official"],["government report","Government report","report"],["podcast episode","Podcast","podcast"],["new webpage","New webpage","web"],["webpage update","Webpage update","web"]];
 var TYPEMAP={};TYPES.forEach(function(t){TYPEMAP[t[0]]={label:t[1],cls:t[2]};});
-var D={topics:[],bills:[],items:[],meta:{},colleges:[]};
+var D={topics:[],bills:[],items:[],meta:{},colleges:[],sessions:[]};
 var app=document.getElementById("app");
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
@@ -241,6 +256,25 @@ function itemsForCollege(c){return D.items.filter(function(it){return (it.colleg
 function itemsLocal(){return D.items.filter(function(it){return !!it.mentionsLocal1600;});}
 function itemsFor(id){return D.items.filter(function(it){return (it.topics||[]).indexOf(id)>-1;});}
 function billHref(num){return "#/bills/"+encodeURIComponent(num);}
+/* sessions and progress */
+var STAGES=["Introduced","In committee","Passed one chamber","Passed both chambers","Sent to the governor","Law"];
+function stageName(b,i){if(i===5&&b.level==="Federal")return "Sent to the president";return STAGES[i-1];}
+function sessionIdOf(b){for(var i=0;i<D.sessions.length;i++){var s=D.sessions[i];for(var j=0;j<(s.parts||[]).length;j++)if(s.parts[j].session===b.session)return s.id;}return "other";}
+function sessionsSorted(){return D.sessions.slice().sort(function(a,b){return a.id<b.id?1:-1;});}
+function currentSessionId(){var ss=sessionsSorted();for(var i=0;i<ss.length;i++){var id=ss[i].id;if(D.bills.some(function(b){return sessionIdOf(b)===id;}))return id;}return ss.length?ss[0].id:"other";}
+function inCurrentSession(b){return !D.sessions.length||sessionIdOf(b)===currentSessionId();}
+function progress(b,compact){
+  var st=+b.stage||0;if(st<1||st>6)return "";
+  var bar="",lab="";
+  for(var i=1;i<=6;i++){var c=i<st?"done":(i===st?"cur":"");bar+='<span class="'+c+'"></span>';lab+='<span class="'+(i===st?"cur":"")+'">'+esc(stageName(b,i))+'</span>';}
+  return '<div class="prog'+(compact?" compact":"")+'"><div class="prog-now">'+esc(stageName(b,st))+' <span>· stage '+st+' of 6</span></div><div class="prog-bar" aria-hidden="true">'+bar+'</div><div class="prog-labels" aria-hidden="true">'+lab+'</div></div>';
+}
+function nextText(b){
+  if(!b.nextStep)return "";
+  var t=b.nextStep;
+  if(b.nextDate&&ageDays(b.nextDate)<=0)t+=" "+(b.level==="Illinois"?"Next session day":"Next date")+": "+fmtDay(b.nextDate,true)+".";
+  return t;
+}
 
 function kindTag(t){var k=TYPEMAP[t]||{label:t||"Item",cls:"web"};return '<span class="kind '+k.cls+'">'+esc(k.label)+'</span>';}
 var LOCK='<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>';
@@ -357,7 +391,7 @@ function viewHome(level){
     var its=all.filter(isLive).sort(byDate);
     var older=all.length-its.length;
     var nw=its.filter(isNewWeek).length;
-    var chips=(t.bills||[]).map(function(n){var b=bill(n);return '<a class="bill'+(b&&b.isNew?' new':'')+'" href="'+billHref(n)+'">'+(b&&b.isNew?'New: ':'')+esc(n)+'</a>';});
+    var chips=(t.bills||[]).filter(function(n){var b=bill(n);return !b||inCurrentSession(b);}).map(function(n){var b=bill(n);return '<a class="bill'+(b&&b.isNew?' new':'')+'" href="'+billHref(n)+'">'+(b&&b.isNew?'New: ':'')+esc(n)+'</a>';});
     if(!chips.length)chips.push('<span class="bill none">No 2026 bill</span>');
     if(t.billNote)chips.push('<span class="bill expected">'+esc(t.billNote)+'</span>');
     var countTxt=(its.length?plural(its.length,"item")+", last 4 weeks":"No sources in the last 4 weeks")+(older?' · <a href="#/topic/'+esc(t.id)+'/all">see '+older+' older</a>':'');
@@ -373,16 +407,19 @@ function viewTopic(id){
   var t=topic(id);
   if(!t)return '<div class="empty">That topic was not found. <a href="#/">Back to all topics</a>.</div>';
   F.topic="";
-  var bills=(t.bills||[]).map(bill).filter(Boolean);
+  var allBills=(t.bills||[]).map(bill).filter(Boolean);
+  var bills=allBills.filter(inCurrentSession);
+  var olderBills=allBills.length-bills.length;
   var side='<section aria-labelledby="bills-h" style="display:flex;flex-direction:column;gap:10px"><h2 id="bills-h" class="eyebrow">Bills</h2>';
   bills.forEach(function(b){
     var cls=/enacted/i.test(b.status)?" enacted":(b.isNew?" new":"");
     side+='<article class="billcard"><div class="top"><a class="num" href="'+billHref(b.number)+'">'+esc(b.number)+'</a><span class="status'+cls+'">'+esc(b.isNew?"New · "+b.status:b.status)+'</span></div>'+
-      '<span style="font-weight:600">'+esc(b.title)+'</span>'+
+      '<span style="font-weight:600">'+esc(b.title)+'</span>'+progress(b,true)+
       '<span class="meta">Last action'+(b.lastActionDate?' ('+esc(fmtDay(b.lastActionDate,true))+')':'')+': '+esc(b.lastAction)+'</span>'+
-      '<span class="meta">'+esc(b.session)+'</span>'+
-      '<a href="'+esc(safeUrl(b.url))+'" rel="noopener" style="font-weight:700;min-height:36px;display:inline-flex;align-items:center">Official bill page</a></article>';
+      (nextText(b)?'<span class="nextline">Next: '+esc(nextText(b))+'</span>':'')+
+      '<span style="display:flex;flex-wrap:wrap;gap:4px 16px"><a href="'+billHref(b.number)+'" style="font-weight:700;min-height:36px;display:inline-flex;align-items:center">Summary and details</a><a href="'+esc(safeUrl(b.url))+'" rel="noopener" style="font-weight:700;min-height:36px;display:inline-flex;align-items:center">Official bill page</a></span></article>';
   });
+  if(olderBills)side+='<div class="note-box">'+plural(olderBills,"bill")+' from earlier sessions: see the <a href="#/bills">Bills</a> page.</div>';
   if(!bills.length)side+='<div class="note-box">No 2026 bill for this topic.</div>';
   if(t.billNote)side+='<div class="note-box">'+esc(t.billNote)+'.</div>';
   side+='</section>';
@@ -421,7 +458,7 @@ function viewSearch(q){
   var base=D.items.filter(matches);
   var side="";
   if(billHits.length){
-    side+='<section aria-labelledby="bh" style="display:flex;flex-direction:column;gap:10px"><h2 id="bh" class="eyebrow">Matching bills</h2>'+billHits.map(function(b){return '<article class="billcard"><div class="top"><a class="num" href="'+billHref(b.number)+'">'+esc(b.number)+'</a><span class="status">'+esc(b.status)+'</span></div><span style="font-weight:600">'+esc(b.title)+'</span><span class="meta">Last action'+(b.lastActionDate?' ('+esc(fmtDay(b.lastActionDate,true))+')':'')+': '+esc(b.lastAction)+'</span></article>';}).join("")+'</section>';
+    side+='<section aria-labelledby="bh" style="display:flex;flex-direction:column;gap:10px"><h2 id="bh" class="eyebrow">Matching bills</h2>'+billHits.map(function(b){return '<article class="billcard"><div class="top"><a class="num" href="'+billHref(b.number)+'">'+esc(b.number)+'</a><span class="status">'+esc(b.status)+'</span></div><span style="font-weight:600">'+esc(b.title)+'</span>'+progress(b,true)+'<span class="meta">Last action'+(b.lastActionDate?' ('+esc(fmtDay(b.lastActionDate,true))+')':'')+': '+esc(b.lastAction)+'</span>'+(nextText(b)?'<span class="nextline">Next: '+esc(nextText(b))+'</span>':'')+'<a href="'+billHref(b.number)+'" style="font-weight:700">Summary and details</a></article>';}).join("")+'</section>';
   }
   if(base.length)side+=filterForm({topic:true,range:false});else curOpts={};
   var any=billHits.length||base.length;
@@ -432,23 +469,48 @@ function viewSearch(q){
 }
 
 /* ---------- Bills ---------- */
+var billSession="";
+function billCard(b,focus){
+  var tps=(b.topics||[]).map(function(id){var t=topic(id);return t?'<a href="#/topic/'+esc(id)+'">'+esc(t.name)+'</a>':'';}).filter(Boolean).join(", ");
+  var wk=ageDays(b.lastActionDate)<=7;
+  var cls=/enacted|law/i.test(b.status)?" enacted":"";
+  var dl='';
+  if(b.summary)dl+='<dt>What it does</dt><dd>'+esc(b.summary)+'</dd>';
+  if(b.changes)dl+='<dt>What changed</dt><dd>'+esc(b.changes)+'</dd>';
+  if(b.effect)dl+='<dt>Affects</dt><dd>'+esc(b.effect)+'</dd>';
+  dl+='<dt>Last action</dt><dd><b>'+esc(fmtDay(b.lastActionDate,true))+'</b>: '+esc(b.lastAction)+'</dd>';
+  if(nextText(b))dl+='<dt>Next</dt><dd class="next">'+esc(nextText(b))+'</dd>';
+  if(tps)dl+='<dt>Topic</dt><dd>'+tps+'</dd>';
+  return '<article class="bcard'+(focus===b.number?' hit':'')+'" id="bill-'+esc(b.number)+'" tabindex="-1" aria-labelledby="bt-'+esc(b.number.replace(/[^A-Za-z0-9]/g,""))+'">'+
+    '<div class="bc-top"><a class="num" href="'+esc(safeUrl(b.url))+'" rel="noopener">'+esc(b.number)+'<span class="sr-only"> (official bill page)</span></a><span class="status'+cls+'">'+esc(b.status)+'</span>'+(b.isNew?'<span class="wkpill">New bill</span>':'')+(wk?'<span class="wkpill">Action this week</span>':'')+'</div>'+
+    '<h3 id="bt-'+esc(b.number.replace(/[^A-Za-z0-9]/g,""))+'">'+esc(b.title)+'</h3>'+progress(b,false)+
+    '<dl class="bc-dl">'+dl+'</dl></article>';
+}
 function viewBills(focus){
-  function rows(level){
-    var list=D.bills.filter(function(b){return b.level===level;}).sort(function(a,b){return (parseDay(b.lastActionDate)||0)-(parseDay(a.lastActionDate)||0);});
-    if(!list.length)return '<div class="empty">No '+esc(level)+' bills are tracked yet.</div>';
-    return '<table class="bills"><thead><tr><th scope="col">Bill</th><th scope="col">Title</th><th scope="col">Topic</th><th scope="col">Status</th><th scope="col">Last action</th></tr></thead><tbody>'+list.map(function(b){
-      var tps=(b.topics||[]).map(function(id){var t=topic(id);return t?'<a href="#/topic/'+esc(id)+'">'+esc(t.name)+'</a>':'';}).filter(Boolean).join(", ");
-      var wk=ageDays(b.lastActionDate)<=7;
-      return '<tr id="bill-'+esc(b.number)+'"'+(focus===b.number?' class="hit"':'')+'><td class="first" data-label="Bill"><a class="num" href="'+esc(safeUrl(b.url))+'" rel="noopener">'+esc(b.number)+'<span class="sr-only"> (official bill page)</span></a>'+(b.isNew?'<br><span class="wkpill">New bill</span>':'')+'</td>'+
-        '<td data-label="Title">'+esc(b.title)+'</td><td data-label="Topic">'+(tps||'—')+'</td><td data-label="Status">'+esc(b.status)+'</td>'+
-        '<td data-label="Last action"><b>'+esc(fmtDay(b.lastActionDate,true))+'</b>: '+esc(b.lastAction)+(wk?'<br><span class="wkpill">Action this week</span>':'')+'</td></tr>';
-    }).join("")+'</tbody></table>';
+  var ss=sessionsSorted();
+  if(focus){var fb=bill(focus);if(fb)billSession=sessionIdOf(fb);}
+  if(!billSession)billSession=currentSessionId();
+  var opts=ss.map(function(s){var names=(s.parts||[]).map(function(p){return p.session;}).join(" · ");return '<option value="'+esc(s.id)+'"'+(s.id===billSession?" selected":"")+'>'+esc(s.label)+(names?' ('+esc(names)+')':'')+'</option>';}).join("");
+  if(D.bills.some(function(b){return sessionIdOf(b)==="other";}))opts+='<option value="other"'+(billSession==="other"?" selected":"")+'>Other sessions</option>';
+  var sess=null;ss.forEach(function(s){if(s.id===billSession)sess=s;});
+  function section(level,heading){
+    var list=D.bills.filter(function(b){return b.level===level&&sessionIdOf(b)===billSession;}).sort(function(a,b){return (parseDay(b.lastActionDate)||0)-(parseDay(a.lastActionDate)||0);});
+    var part=null;if(sess)(sess.parts||[]).forEach(function(p){if(p.level===level)part=p;});
+    var h='<h2 class="group-h">'+esc(heading)+(part?' · '+esc(part.session):'')+'</h2>';
+    if(part&&part.note)h+='<p class="note-box" style="margin:0 0 12px">'+esc(part.note)+'</p>';
+    if(!list.length)return h+'<div class="empty">No '+esc(level)+' bills are tracked for this session.</div>';
+    var counts=[0,0,0,0,0,0,0];list.forEach(function(b){var st=+b.stage||0;if(st>=1&&st<=6)counts[st]++;});
+    var cl=[];for(var i=1;i<=6;i++)if(counts[i])cl.push(esc(stageName({level:level},i))+' <b>'+counts[i]+'</b>');
+    if(cl.length)h+='<p class="stagecounts">By stage: '+cl.join(" · ")+'</p>';
+    return h+'<div class="bgrid">'+list.map(function(b){return billCard(b,focus);}).join("")+'</div>';
   }
-  var wk=D.bills.filter(function(b){return ageDays(b.lastActionDate)<=7;}).length;
-  app.innerHTML='<div class="topic-head"><h1>Bills</h1><p>Every bill the dashboard tracks, newest action first. Status comes from Illinois General Assembly and Congress records; each bill number opens the official page.</p></div>'+
-    '<div class="toolbar"><div class="weekly"><span class="dot" aria-hidden="true"></span><span><b>'+plural(wk,"bill")+' with action this week</b> <span class="meta">of '+D.bills.length+' tracked</span></span></div></div>'+
-    '<h2 class="group-h">Illinois General Assembly</h2>'+rows("Illinois")+'<h2 class="group-h">U.S. Congress</h2>'+rows("Federal");
-  if(focus){var r=document.getElementById("bill-"+focus);if(r){setTimeout(function(){r.scrollIntoView({block:"center"});var a=r.querySelector("a");if(a)a.focus({preventScroll:true});},0);}}
+  var inSess=D.bills.filter(function(b){return sessionIdOf(b)===billSession;});
+  var wk=inSess.filter(function(b){return ageDays(b.lastActionDate)<=7;}).length;
+  app.innerHTML='<div class="topic-head"><h1>Bills</h1><p>Every bill the dashboard tracks, newest action first, with a plain-language summary, where it stands, and what comes next. Status comes from Illinois General Assembly and Congress records; each bill number opens the official page.</p></div>'+
+    '<div class="sessbar"><label for="b-sess">Session <select id="b-sess">'+opts+'</select></label><div class="weekly"><span class="dot" aria-hidden="true"></span><span><b>'+plural(wk,"bill")+' with action this week</b> <span class="meta">of '+inSess.length+' tracked this session</span></span></div></div>'+
+    section("Illinois","Illinois")+section("Federal","Federal");
+  document.getElementById("b-sess").addEventListener("change",function(e){billSession=e.target.value;if(location.hash!=="#/bills")location.hash="#/bills";else{viewBills("");}});
+  if(focus){var r=document.getElementById("bill-"+focus);if(r){setTimeout(function(){r.scrollIntoView({block:"start"});r.focus({preventScroll:true});},0);}}
   return null;
 }
 
@@ -541,8 +603,8 @@ function route(){
 }
 
 function load(name){return fetch("data/"+name+".json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(name);return r.json();});}
-Promise.all([load("topics"),load("bills"),load("items"),load("meta"),load("colleges").catch(function(){return [];})]).then(function(r){
-  D.topics=r[0];D.bills=r[1];D.items=r[2].filter(function(it){return !it.hidden;});D.meta=r[3]||{};D.colleges=r[4]||[];
+Promise.all([load("topics"),load("bills"),load("items"),load("meta"),load("colleges").catch(function(){return [];}),load("sessions").catch(function(){return [];})]).then(function(r){
+  D.topics=r[0];D.bills=r[1];D.items=r[2].filter(function(it){return !it.hidden;});D.meta=r[3]||{};D.colleges=r[4]||[];D.sessions=r[5]||[];
   var stamp=D.meta.lastUpdated?fmtStamp(D.meta.lastUpdated):"";
   document.getElementById("updated").textContent=stamp?"Updated "+stamp:"";
   document.getElementById("foot-updated").textContent=stamp?"Last updated "+stamp:"";
