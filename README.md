@@ -22,3 +22,7 @@ To take an item off the site, open `data/items.json` on GitHub, find the item, c
 ## Hosting
 
 The site is served by GitHub Pages from the `main` branch (Settings → Pages → Deploy from a branch → `main` / root).
+
+## Colleges and Local 1600 tabs
+
+`data/colleges.json` lists the 14 colleges plus the City Colleges of Chicago system, with official names, districts, locations and Local 1600 chapters. The daily scan reads it but never rewrites it; edit it by hand if a name or chapter changes. College and Local 1600 items live in `data/items.json` like every other item (tagged by `colleges` and `mentionsLocal1600`), and you hide them the same way.

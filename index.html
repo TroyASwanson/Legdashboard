@@ -22,6 +22,7 @@ body{background:var(--ground);color:var(--ink);font:16px/1.5 var(--font);-webkit
 a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
 a:hover{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#app:focus{outline:none}
 .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
 @media (min-width:700px){.wrap{padding:0 24px}}
 .notice{background:var(--ink);color:#fff;font-size:14px;line-height:1.45}
@@ -44,8 +45,9 @@ main{padding:16px 0 32px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
 h1,h2,h3{text-wrap:balance}
 .toolbar{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;margin-bottom:16px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--surface);width:100%;max-width:340px}
-.tabs a{min-height:46px;display:flex;align-items:center;justify-content:center;font-weight:700;text-decoration:none}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--surface);width:100%;max-width:600px}
+@media (max-width:460px){.tabs{grid-template-columns:1fr 1fr}.tabs a:nth-child(-n+2){border-bottom:1.5px solid var(--ink)}}
+.tabs a{min-height:46px;display:flex;align-items:center;justify-content:center;font-weight:700;text-decoration:none;padding:0 8px;text-align:center}
 .tabs a[aria-current="page"]{background:var(--ink);color:#fff}
 .weekly{display:flex;align-items:center;gap:10px}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none}
@@ -119,6 +121,10 @@ a.tag:hover{border-color:var(--accent)}
 .prose ul{padding-left:20px;margin:0 0 10px}
 footer{border-top:1px solid var(--rule);background:var(--surface)}
 footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.group-h{font-size:15px;font-weight:800;margin:26px 0 10px;letter-spacing:.01em}
+.group-h:first-of-type{margin-top:4px}
+.facts{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.facts b{font-weight:700}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -131,7 +137,7 @@ footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--mut
     <span><small>Cook County College Teachers Union · AFT-IFT Local 1600</small><strong>Legislative Dashboard</strong></span>
   </a>
   <nav class="pages" aria-label="Pages">
-    <a href="#/" data-nav="home">Topics</a>
+    <a href="#/" data-nav="home">Home</a>
     <a href="#/sources" data-nav="sources">All sources</a>
     <a href="#/archive" data-nav="archive">Archive</a>
     <a href="#/about" data-nav="about">About</a>
@@ -149,10 +155,10 @@ footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--mut
 <script>
 (function(){
 "use strict";
-var COLLEGES=["Richard J. Daley College","Harold Washington College","Kennedy-King College","Malcolm X College","Olive-Harvey College","Harry S Truman College","Wilbur Wright College","Harper College","Moraine Valley Community College","Morton College","Oakton College","Prairie State College","South Suburban College","Triton College"];
+var COLLEGES=["City Colleges of Chicago","Richard J. Daley College","Harold Washington College","Kennedy-King College","Malcolm X College","Olive-Harvey College","Harry S Truman College","Wilbur Wright College","Harper College","Moraine Valley Community College","Morton College","Oakton College","Prairie State College","South Suburban College","Triton College"];
 var TYPES=[["news report","News report","news"],["opinion or editorial","Opinion","opinion"],["press release","Press release","press"],["official statement","Official statement","official"],["government report","Government report","report"],["podcast episode","Podcast","podcast"],["new webpage","New webpage","web"],["webpage update","Webpage update","web"]];
 var TYPEMAP={};TYPES.forEach(function(t){TYPEMAP[t[0]]={label:t[1],cls:t[2]};});
-var D={topics:[],bills:[],items:[],meta:{}};
+var D={topics:[],bills:[],items:[],meta:{},colleges:[]};
 var app=document.getElementById("app");
 
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
@@ -168,6 +174,10 @@ function isNewWeek(it){return ageDays(it.pubDate)<=7;}
 function byDate(a,b){return (parseDay(b.pubDate)||0)-(parseDay(a.pubDate)||0)||((a.tier||3)-(b.tier||3));}
 function topic(id){for(var i=0;i<D.topics.length;i++)if(D.topics[i].id===id)return D.topics[i];return null;}
 function bill(num){for(var i=0;i<D.bills.length;i++)if(D.bills[i].number===num)return D.bills[i];return null;}
+function collegeByName(n){for(var i=0;i<D.colleges.length;i++)if(D.colleges[i].name===n)return D.colleges[i];return null;}
+function college(id){for(var i=0;i<D.colleges.length;i++)if(D.colleges[i].id===id)return D.colleges[i];return null;}
+function itemsForCollege(c){return D.items.filter(function(it){return (it.colleges||[]).indexOf(c.name)>-1;});}
+function itemsLocal(){return D.items.filter(function(it){return !!it.mentionsLocal1600;});}
 function itemsFor(id){return D.items.filter(function(it){return (it.topics||[]).indexOf(id)>-1;});}
 
 function kindTag(t){var k=TYPEMAP[t]||{label:t||"Item",cls:"web"};return '<span class="kind '+k.cls+'">'+esc(k.label)+'</span>';}
@@ -175,7 +185,7 @@ var LOCK='<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fil
 function itemCard(it,showTopics){
   var tags=[];
   if(showTopics!==false)(it.topics||[]).forEach(function(id){var t=topic(id);if(t)tags.push('<a class="tag" href="#/topic/'+esc(id)+'">'+esc(t.name)+'</a>');});
-  (it.colleges||[]).forEach(function(c){tags.push('<span class="tag">'+esc(c==="statewide"?"Statewide":c)+'</span>');});
+  (it.colleges||[]).forEach(function(c){var col=collegeByName(c);tags.push(col?'<a class="tag" href="#/college/'+esc(col.id)+'">'+esc(c)+'</a>':'<span class="tag">'+esc(c==="statewide"?"Statewide":c)+'</span>');});
   return '<article class="item"><div class="item-top">'+kindTag(it.itemType)+
     (it.paywall?'<span class="flag">'+LOCK+'Paywall</span>':'')+
     (it.mentionsLocal1600?'<span class="flag local">Mentions Local 1600</span>':'')+
@@ -193,9 +203,10 @@ function filterForm(opts){
   if(opts.search)h+='<label for="f-q">Search<input id="f-q" type="search" value="'+esc(F.q)+'" placeholder="Headline, outlet or summary"></label>';
   if(opts.topic){h+='<label for="f-topic">Topic<select id="f-topic"><option value="">All topics</option>';D.topics.forEach(function(t){h+='<option value="'+esc(t.id)+'"'+(F.topic===t.id?" selected":"")+'>'+(t.level==="Illinois"?"Illinois ":"Federal ")+t.rank+': '+esc(t.name)+'</option>';});h+='</select></label>';}
   h+='<label for="f-type">Source type<select id="f-type"><option value="">All types</option>';TYPES.forEach(function(t){h+='<option value="'+esc(t[0])+'"'+(F.type===t[0]?" selected":"")+'>'+esc(t[1])+'</option>';});h+='</select></label>';
-  h+='<label for="f-college">College<select id="f-college"><option value="">All colleges</option><option value="statewide"'+(F.college==="statewide"?" selected":"")+'>Statewide</option>';COLLEGES.forEach(function(c){h+='<option'+(F.college===c?" selected":"")+'>'+esc(c)+'</option>';});h+='</select></label>';
+  if(opts.college!==false){h+='<label for="f-college">College<select id="f-college"><option value="">All colleges</option><option value="statewide"'+(F.college==="statewide"?" selected":"")+'>Statewide</option>';COLLEGES.forEach(function(c){h+='<option'+(F.college===c?" selected":"")+'>'+esc(c)+'</option>';});h+='</select></label>';}
   if(opts.range)h+='<label for="f-range">Date range<select id="f-range"><option value="live"'+(F.range==="live"?" selected":"")+'>Last 4 weeks</option><option value="week"'+(F.range==="week"?" selected":"")+'>Last 7 days</option><option value="all"'+(F.range==="all"?" selected":"")+'>Include archive</option></select></label>';
-  h+='<label class="check" for="f-local"><input id="f-local" type="checkbox"'+(F.local?" checked":"")+'> Mentions Local 1600</label></form>';
+  if(opts.local!==false)h+='<label class="check" for="f-local"><input id="f-local" type="checkbox"'+(F.local?" checked":"")+'> Mentions Local 1600</label>';
+  return h+'</form>';
   return h;
 }
 function applyFilters(list,mode){
@@ -218,14 +229,64 @@ function bindFilters(rerender){
   var q=document.getElementById("f-q");if(q)q.addEventListener("input",function(){F.q=q.value;rerender();});
 }
 
+function sectionTabs(cur){
+  return '<nav class="tabs" aria-label="Sections">'+[["Illinois","#/illinois"],["Federal","#/federal"],["Colleges","#/colleges"],["Local 1600","#/local1600"]].map(function(t){return '<a href="'+t[1]+'"'+(cur===t[0]?' aria-current="page"':'')+'>'+t[0]+'</a>';}).join("")+'</nav>';
+}
+function feedShell(sideHtml,label){
+  return '<div class="cols"><aside class="side">'+sideHtml+'</aside><section class="feed" aria-labelledby="src-h"><div class="feed-head"><h2 id="src-h" class="eyebrow">'+label+'</h2><span class="meta" id="count"></span></div><div id="list" style="display:flex;flex-direction:column;gap:12px"></div></section></div>';
+}
+function bindFeed(getList,emptyMsg){
+  function render(){
+    var list=applyFilters(getList());
+    document.getElementById("count").textContent=list.length+" item"+(list.length===1?"":"s");
+    document.getElementById("list").innerHTML=list.length?list.map(function(it){return itemCard(it,true);}).join(""):'<div class="empty">'+(getList().length?"No sources match these filters.":emptyMsg)+'</div>';
+  }
+  bindFilters(render);render();
+}
+function collegeCard(c){
+  var all=itemsForCollege(c).sort(byDate);
+  var nw=all.filter(isNewWeek).length;
+  var sub=(c.group==="system"?"District 508 · all seven City Colleges":"District "+c.district+" · "+c.location);
+  return '<article class="card"><div class="card-head"><div style="flex:1;display:flex;flex-direction:column;gap:4px"><h2><a href="#/college/'+esc(c.id)+'">'+esc(c.name)+'</a></h2><span class="meta">'+esc(sub)+'</span><span class="meta">Local 1600 chapters: '+esc(c.chapters)+'</span></div>'+(nw?'<span class="newpill">'+nw+' new</span>':'')+'</div>'+
+    (all.length?'<ul class="latest">'+all.slice(0,2).map(function(it){return '<li><a href="'+esc(safeUrl(it.url))+'" rel="noopener">'+esc(it.headline)+'</a><div class="meta">'+esc(it.outlet)+' · '+esc(fmtDay(it.pubDate,true))+'</div></li>';}).join("")+'</ul>':'<p class="empty-line">No items found yet.</p>')+
+    '<a class="more" href="#/college/'+esc(c.id)+'">Open college'+(all.length>2?' ('+all.length+' items)':'')+'<span aria-hidden="true">→</span></a></article>';
+}
+function viewColleges(){
+  var week=D.items.filter(function(it){return isNewWeek(it)&&(it.colleges||[]).some(function(n){return !!collegeByName(n);});}).length;
+  var groups=[["system","City Colleges of Chicago system"],["city","The seven City Colleges (District 508)"],["suburban","The seven suburban colleges"]];
+  var h='<h1 class="sr-only">Colleges</h1><div class="toolbar">'+sectionTabs("Colleges")+'<div class="weekly"><span class="dot" aria-hidden="true"></span><span><b>'+week+' new this week</b> <span class="meta">board actions, budgets, contracts, leadership, programs, enrollment and safety · no sports or obituaries</span></span></div></div>';
+  groups.forEach(function(g){
+    var list=D.colleges.filter(function(c){return c.group===g[0];});
+    if(!list.length)return;
+    h+='<h2 class="group-h">'+esc(g[1])+'</h2><div class="grid">'+list.map(collegeCard).join("")+'</div>';
+  });
+  if(!D.colleges.length)h+='<div class="empty">The college list could not be loaded.</div>';
+  return h;
+}
+function viewCollege(id){
+  var c=college(id);
+  if(!c)return '<div class="empty">That college was not found. <a href="#/colleges">Back to all colleges</a>.</div>';
+  F.college="";
+  var facts='<div class="facts"><span><b>Official name:</b> '+esc(c.officialName)+'</span><span><b>District:</b> Community College District '+esc(c.district)+'</span><span><b>Location:</b> '+esc(c.location)+'</span><span><b>Local 1600 chapters:</b> '+esc(c.chapters)+'</span></div>';
+  if(c.group==="city")facts+='<div class="note-box">News about the whole City Colleges system, such as contracts and board actions, is on the <a href="#/college/ccc">City Colleges of Chicago</a> page.</div>';
+  if(c.group==="system")facts+='<div class="note-box">Items about a single college are on that college\'s page: '+D.colleges.filter(function(x){return x.group==="city";}).map(function(x){return '<a href="#/college/'+esc(x.id)+'">'+esc(x.name)+'</a>';}).join(", ")+'.</div>';
+  app.innerHTML='<a class="back" href="#/colleges"><span aria-hidden="true">←</span>All colleges</a><div class="topic-head"><p class="eyebrow">'+(c.group==="suburban"?"Suburban college":c.group==="city"?"City Colleges of Chicago":"College system")+'</p><h1>'+esc(c.name)+'</h1><p>News, press releases and official notices about '+esc(c.name)+': board actions, budgets and tax levies, contracts and labor relations, leadership changes, program changes, enrollment and campus safety.</p></div>'+
+    feedShell(facts+filterForm({range:true,college:false}),"Sources · newest first");
+  bindFeed(function(){return itemsForCollege(c);},"No items found for this college yet. The daily scan checks every morning.");
+  return null;
+}
+function viewLocal(){
+  app.innerHTML='<h1 class="sr-only">Local 1600</h1><div class="toolbar">'+sectionTabs("Local 1600")+'</div><div class="topic-head"><h1>Local 1600 in the news</h1><p>Sources that name the Cook County College Teachers Union, Local 1600, at any of the fourteen colleges, including contract and bargaining coverage. Listing an item does not mean the union agrees with it.</p></div>'+
+    feedShell(filterForm({range:true,local:false}),"Sources · newest first");
+  bindFeed(itemsLocal,"No items found yet. The daily scan checks every morning.");
+  return null;
+}
 function viewHome(level){
   var list=D.topics.filter(function(t){return t.level===level;}).sort(function(a,b){return a.rank-b.rank;});
   var weekItems=D.items.filter(function(it){return isNewWeek(it)&&(it.topics||[]).some(function(id){var t=topic(id);return t&&t.level===level;});});
   var weekTopics={};weekItems.forEach(function(it){(it.topics||[]).forEach(function(id){var t=topic(id);if(t&&t.level===level)weekTopics[id]=1;});});
   var nTopics=Object.keys(weekTopics).length;
-  var h='<h1 class="sr-only">'+esc(level)+' topics</h1><div class="toolbar"><nav class="tabs" aria-label="Level">'+
-    '<a href="#/illinois"'+(level==="Illinois"?' aria-current="page"':'')+'>Illinois</a>'+
-    '<a href="#/federal"'+(level==="Federal"?' aria-current="page"':'')+'>Federal</a></nav>'+
+  var h='<h1 class="sr-only">'+esc(level)+' topics</h1><div class="toolbar">'+sectionTabs(level)+
     '<div class="weekly"><span class="dot" aria-hidden="true"></span><span><b>'+weekItems.length+' new this week</b> <span class="meta">across '+nTopics+' topic'+(nTopics===1?'':'s')+' · topics in priority order</span></span></div></div><div class="grid">';
   list.forEach(function(t){
     var its=itemsFor(t.id).filter(isLive).sort(byDate);
@@ -272,7 +333,7 @@ function viewTopic(id){
 
 function viewList(mode){
   var title=mode==="archive"?"Archive":"All sources";
-  var intro=mode==="archive"?"Items four weeks old or older. They stay searchable here.":"Everything found in the last four weeks, across all topics, newest first.";
+  var intro=mode==="archive"?"Items four weeks old or older. They stay searchable here.":"Everything found in the last four weeks, across all topics and colleges, newest first.";
   app.innerHTML='<div class="topic-head"><h1>'+title+'</h1><p>'+intro+'</p></div><div class="cols"><aside class="side">'+filterForm({search:true,topic:true,range:mode!=="archive"})+'</aside><section class="feed" aria-labelledby="src-h"><div class="feed-head"><h2 id="src-h" class="eyebrow">'+(mode==="archive"?"Archived items":"Sources")+'</h2><span class="meta" id="count"></span></div><div id="list" style="display:flex;flex-direction:column;gap:12px"></div></section></div>';
   function render(){
     var list=applyFilters(D.items,mode);
@@ -289,17 +350,25 @@ function viewAbout(){
   '<h2>What it is</h2><p>An automated list of information sources on Local 1600’s legislative topics: news, podcasts, government reports, press releases and changes to key webpages. Topics are listed in the Legislative Chair’s priority order, split into Illinois and federal, and every item is linked to the topic it concerns.</p>'+
   '<h2>What it is not</h2><ul><li>Not a position statement. It catalogs sources and does not publish Local 1600’s positions.</li><li>Not a call to action. There are no action alerts or contact forms.</li><li>Not reviewed item by item. A scan runs every morning at about 8:30 a.m. Central and publishes what it finds automatically.</li><li>Not a news archive. Each item is a headline, outlet, date, link and a short original summary. Article text is never reproduced.</li></ul>'+
   '<h2>How items are chosen</h2><p>The daily scan checks news outlets, government agencies and officials first, then union and partner organizations, then broader keyword searches. An item is published only if it substantively concerns a tracked topic, bill or named act. Items stay on the main pages for four weeks and then move to the <a href="#/archive">Archive</a>.</p>'+
-  '<h2>Sources checked</h2><p>Statehouse, Chicago, suburban and regional news (including Capitol News Illinois, WBEZ, WTTW, the Chicago Sun-Times, Chalkbeat Chicago, the Daily Herald, Journal &amp; Topics and local Patch editions); higher-education outlets; Illinois and federal agencies and officials; union and partner organizations; Illinois and Chicago podcasts; and official bill status records. Coverage includes all seven City Colleges and the seven suburban colleges.</p>'+
+  '<h2>Sources checked</h2><p>Statehouse, Chicago, suburban and regional news (including Capitol News Illinois, WBEZ, WTTW, the Chicago Sun-Times, Chalkbeat Chicago, the Daily Herald, Journal &amp; Topics and local Patch editions); higher-education outlets; Illinois and federal agencies and officials; union and partner organizations; Illinois and Chicago podcasts; and official bill status records. Chicago TV newsrooms and community papers are searched for college news. Coverage includes all seven City Colleges and the seven suburban colleges.</p>'+
+  '<h2>Colleges and Local 1600 tabs</h2><p>The <a href="#/colleges">Colleges</a> tab has a page for each of the fourteen colleges and one for the City Colleges of Chicago system as a whole. The scan searches each college by its official name (for example, William Rainey Harper College) and its common name. It keeps board actions, budgets and tax levies, contracts and labor relations, leadership changes, program cuts or expansions, enrollment and campus safety. It leaves out sports, obituaries and routine campus events. The <a href="#/local1600">Local 1600</a> tab lists sources that name the Cook County College Teachers Union or Local 1600. These pages show older items too, since college news moves more slowly.</p>'+
   '<h2>Source labels</h2><p>Each item shows its kind first: news report, opinion, press release, official statement, government report, podcast, or webpage. Readers should judge a source by its kind.</p>'+
   '<h2>Paywalls</h2><p>Some outlets (for example the Chicago Tribune, Crain’s, the Daily Herald and The Chronicle of Higher Education) require a subscription. Those items are marked <b>Paywall</b>. Use your own subscription or your college library’s access.</p></article>';
 }
 
 function setNav(key){document.querySelectorAll("nav.pages a").forEach(function(a){if(a.getAttribute("data-nav")===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});}
 var lastLevel="Illinois";
+/* college and Local 1600 pages default to showing older items too; topic pages default to the last four weeks */
+var section="";
+function setSection(s){if(s===section)return;section=s;F.range=(s==="topics")?"live":"all";}
 function route(){
   var h=(location.hash||"#/").replace(/^#\/?/,"");var parts=h.split("/");
   var out=null;
+  if(!(parts[0]==="colleges"||parts[0]==="college"||parts[0]==="local1600"))setSection("topics");
   if(parts[0]==="topic"&&parts[1]){var t=topic(parts[1]);if(t)lastLevel=t.level;setNav("home");out=viewTopic(parts[1]);document.title=(t?t.name+" · ":"")+"Legislative Dashboard · CCCTU Local 1600";}
+  else if(parts[0]==="colleges"){setSection("colleges");setNav("home");out=viewColleges();document.title="Colleges · Legislative Dashboard";}
+  else if(parts[0]==="college"&&parts[1]){setSection("colleges");setNav("home");var c=college(parts[1]);out=viewCollege(parts[1]);document.title=(c?c.name+" · ":"")+"Legislative Dashboard · CCCTU Local 1600";}
+  else if(parts[0]==="local1600"){setSection("local");setNav("home");out=viewLocal();document.title="Local 1600 · Legislative Dashboard";}
   else if(parts[0]==="sources"){setNav("sources");out=viewList("sources");document.title="All sources · Legislative Dashboard";}
   else if(parts[0]==="archive"){setNav("archive");out=viewList("archive");document.title="Archive · Legislative Dashboard";}
   else if(parts[0]==="about"){setNav("about");out=viewAbout();document.title="About · Legislative Dashboard";}
@@ -310,8 +379,8 @@ function route(){
 }
 
 function load(name){return fetch("data/"+name+".json",{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(name);return r.json();});}
-Promise.all([load("topics"),load("bills"),load("items"),load("meta")]).then(function(r){
-  D.topics=r[0];D.bills=r[1];D.items=r[2].filter(function(it){return !it.hidden;});D.meta=r[3]||{};
+Promise.all([load("topics"),load("bills"),load("items"),load("meta"),load("colleges").catch(function(){return [];})]).then(function(r){
+  D.topics=r[0];D.bills=r[1];D.items=r[2].filter(function(it){return !it.hidden;});D.meta=r[3]||{};D.colleges=r[4]||[];
   var stamp=D.meta.lastUpdated?fmtStamp(D.meta.lastUpdated):"";
   document.getElementById("updated").textContent=stamp?"Updated "+stamp:"";
   document.getElementById("foot-updated").textContent=stamp?"Last updated "+stamp:"";

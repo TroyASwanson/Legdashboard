@@ -1,0 +1,189 @@
+[
+ {
+  "id": "ccc",
+  "name": "City Colleges of Chicago",
+  "officialName": "City Colleges of Chicago (Community College District 508)",
+  "district": "508",
+  "location": "Chicago",
+  "group": "system",
+  "chapters": "City Colleges (faculty and professionals)",
+  "searchNames": [
+   "City Colleges of Chicago",
+   "CCC"
+  ]
+ },
+ {
+  "id": "daley",
+  "name": "Richard J. Daley College",
+  "officialName": "Richard J. Daley College",
+  "district": "508",
+  "location": "Chicago (Southwest Side)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Richard J. Daley College",
+   "Daley College"
+  ]
+ },
+ {
+  "id": "hwc",
+  "name": "Harold Washington College",
+  "officialName": "Harold Washington College",
+  "district": "508",
+  "location": "Chicago (Loop)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Harold Washington College"
+  ]
+ },
+ {
+  "id": "kkc",
+  "name": "Kennedy-King College",
+  "officialName": "Kennedy-King College",
+  "district": "508",
+  "location": "Chicago (Englewood)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Kennedy-King College"
+  ]
+ },
+ {
+  "id": "mxc",
+  "name": "Malcolm X College",
+  "officialName": "Malcolm X College",
+  "district": "508",
+  "location": "Chicago (Near West Side)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Malcolm X College"
+  ]
+ },
+ {
+  "id": "ohc",
+  "name": "Olive-Harvey College",
+  "officialName": "Olive-Harvey College",
+  "district": "508",
+  "location": "Chicago (Pullman)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Olive-Harvey College"
+  ]
+ },
+ {
+  "id": "truman",
+  "name": "Harry S Truman College",
+  "officialName": "Harry S Truman College",
+  "district": "508",
+  "location": "Chicago (Uptown)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Harry S Truman College",
+   "Truman College"
+  ]
+ },
+ {
+  "id": "wright",
+  "name": "Wilbur Wright College",
+  "officialName": "Wilbur Wright College",
+  "district": "508",
+  "location": "Chicago (Dunning)",
+  "group": "city",
+  "chapters": "City Colleges",
+  "searchNames": [
+   "Wilbur Wright College",
+   "Wright College"
+  ]
+ },
+ {
+  "id": "harper",
+  "name": "Harper College",
+  "officialName": "William Rainey Harper College",
+  "district": "512",
+  "location": "Palatine",
+  "group": "suburban",
+  "chapters": "Faculty; Pro-Tech",
+  "searchNames": [
+   "William Rainey Harper College",
+   "Harper College"
+  ]
+ },
+ {
+  "id": "mvcc",
+  "name": "Moraine Valley Community College",
+  "officialName": "Moraine Valley Community College",
+  "district": "524",
+  "location": "Palos Hills",
+  "group": "suburban",
+  "chapters": "Faculty; Adjunct Faculty; Classified; Professionals",
+  "searchNames": [
+   "Moraine Valley Community College",
+   "Moraine Valley"
+  ]
+ },
+ {
+  "id": "morton",
+  "name": "Morton College",
+  "officialName": "Morton College",
+  "district": "527",
+  "location": "Cicero",
+  "group": "suburban",
+  "chapters": "Faculty; Classified",
+  "searchNames": [
+   "Morton College"
+  ]
+ },
+ {
+  "id": "oakton",
+  "name": "Oakton College",
+  "officialName": "Oakton College (formerly Oakton Community College)",
+  "district": "535",
+  "location": "Des Plaines and Skokie",
+  "group": "suburban",
+  "chapters": "Classified",
+  "searchNames": [
+   "Oakton College",
+   "Oakton Community College"
+  ]
+ },
+ {
+  "id": "psc",
+  "name": "Prairie State College",
+  "officialName": "Prairie State College",
+  "district": "515",
+  "location": "Chicago Heights",
+  "group": "suburban",
+  "chapters": "Classified",
+  "searchNames": [
+   "Prairie State College"
+  ]
+ },
+ {
+  "id": "ssc",
+  "name": "South Suburban College",
+  "officialName": "South Suburban College",
+  "district": "510",
+  "location": "South Holland",
+  "group": "suburban",
+  "chapters": "Faculty; Adjunct; Classified",
+  "searchNames": [
+   "South Suburban College"
+  ]
+ },
+ {
+  "id": "triton",
+  "name": "Triton College",
+  "officialName": "Triton College",
+  "district": "504",
+  "location": "River Grove",
+  "group": "suburban",
+  "chapters": "Faculty; MidManager; Classified",
+  "searchNames": [
+   "Triton College"
+  ]
+ }
+]
