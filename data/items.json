@@ -1,5 +1,47 @@
 [
  {
+  "id": "stateweek-20261120-illinois-finances",
+  "headline": "State Week: A dark cloud looming for Illinois' finances",
+  "outlet": "State Week (NPR Illinois)",
+  "pubDate": "2026-11-20",
+  "url": "https://www.nprillinois.org/government-politics/2026-11-20/state-week-a-dark-cloud-looming-for-illinois-finances",
+  "summary": "This week's State Week discusses the new state forecast of a shortfall of up to $2.4 billion next fiscal year, tied to federal policy changes. The show notes do not mention higher education or community colleges.",
+  "itemType": "podcast episode",
+  "topics": [
+   "il-1"
+  ],
+  "bills": [],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-21",
+  "tier": 1
+ },
+ {
+  "id": "abc7-20261120-house-vote-striking-workers-unemployment",
+  "headline": "Illinois House to vote on bill allowing striking workers to receive unemployment benefits",
+  "outlet": "ABC7 Chicago",
+  "pubDate": "2026-11-20",
+  "url": "https://abc7chicago.com/post/illinois-house-vote-bill-allowing-striking-workers-receive-unemployment-benefits-dont-support/20060848/",
+  "summary": "The Illinois House is expected to vote on a bill that would let striking workers collect unemployment insurance once a strike lasts more than two weeks; the description matches HB2565. The report lays out the arguments of supporters and of manufacturing and retail groups over cost and strike length, and notes the bill would go to the Senate in January if it passes the House.",
+  "itemType": "news report",
+  "topics": [
+   "il-9"
+  ],
+  "bills": [
+   "HB2565"
+  ],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-22",
+  "tier": 1
+ },
+ {
   "id": "ihe-20261120-programmatic-accreditation-rule",
   "headline": "New Rule Changes the Future of Programmatic Accreditation",
   "outlet": "Inside Higher Ed",
@@ -42,37 +84,19 @@
   "tier": 1
  },
  {
-  "id": "stateweek-20261120-illinois-finances",
-  "headline": "State Week: A dark cloud looming for Illinois' finances",
-  "outlet": "State Week (NPR Illinois)",
-  "pubDate": "2026-11-20",
-  "url": "https://www.nprillinois.org/government-politics/2026-11-20/state-week-a-dark-cloud-looming-for-illinois-finances",
-  "summary": "This week's State Week discusses the new state forecast of a shortfall of up to $2.4 billion next fiscal year, tied to federal policy changes. The show notes do not mention higher education or community colleges.",
-  "itemType": "podcast episode",
-  "topics": [
-   "il-1"
-  ],
-  "bills": [],
-  "colleges": [
-   "statewide"
-  ],
-  "mentionsLocal1600": false,
-  "paywall": false,
-  "dateCaptured": "2026-11-21",
-  "tier": 1
- },
- {
-  "id": "ccd-20261119-edgar-grant-rule-opposition",
-  "headline": "Voicing opposition to EDGAR changes",
-  "outlet": "Community College Daily",
+  "id": "ilga-20261119-hb5236-alternate-co-sponsor",
+  "headline": "HB5236: Added as Alternate Co-Sponsor (Senate)",
+  "outlet": "Illinois General Assembly",
   "pubDate": "2026-11-19",
-  "url": "https://www.ccdaily.com/2026/11/voicing-opposition-to-edgar-changes/",
-  "summary": "The Education Department has proposed changes to its general grant regulations (EDGAR) that community colleges say would let the agency end grants early and attach new conditions to funding. Congress has blocked a parallel government-wide OMB grant rule through Dec. 11, and college advocates told a congressional briefing they want that block extended and the EDGAR changes stopped too.",
-  "itemType": "news report",
+  "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=5236&GAID=18&DocTypeID=HB&GA=104&SessionID=114",
+  "summary": "The Digital Library Protection Act passed the House 99-0-1 in April and is pending in the Senate Assignments Committee. It picked up additional Senate alternate co-sponsors on Nov. 6, Nov. 17 and Nov. 19 but has not yet been assigned to a Senate committee.",
+  "itemType": "official statement",
   "topics": [
-   "fed-7"
+   "il-8"
   ],
-  "bills": [],
+  "bills": [
+   "HB5236"
+  ],
   "colleges": [
    "statewide"
   ],
@@ -104,19 +128,17 @@
   "tier": 3
  },
  {
-  "id": "ilga-20261119-hb5236-alternate-co-sponsor",
-  "headline": "HB5236: Added as Alternate Co-Sponsor (Senate)",
-  "outlet": "Illinois General Assembly",
+  "id": "ccd-20261119-edgar-grant-rule-opposition",
+  "headline": "Voicing opposition to EDGAR changes",
+  "outlet": "Community College Daily",
   "pubDate": "2026-11-19",
-  "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=5236&GAID=18&DocTypeID=HB&GA=104&SessionID=114",
-  "summary": "The Digital Library Protection Act passed the House 99-0-1 in April and is pending in the Senate Assignments Committee. It picked up additional Senate alternate co-sponsors on Nov. 6, Nov. 17 and Nov. 19 but has not yet been assigned to a Senate committee.",
-  "itemType": "official statement",
+  "url": "https://www.ccdaily.com/2026/11/voicing-opposition-to-edgar-changes/",
+  "summary": "The Education Department has proposed changes to its general grant regulations (EDGAR) that community colleges say would let the agency end grants early and attach new conditions to funding. Congress has blocked a parallel government-wide OMB grant rule through Dec. 11, and college advocates told a congressional briefing they want that block extended and the EDGAR changes stopped too.",
+  "itemType": "news report",
   "topics": [
-   "il-8"
+   "fed-7"
   ],
-  "bills": [
-   "HB5236"
-  ],
+  "bills": [],
   "colleges": [
    "statewide"
   ],
@@ -148,6 +170,28 @@
   "tier": 1
  },
  {
+  "id": "centersquare-20261118-strike-unemployment-gains-support",
+  "headline": "Unemployment for workers on strike gains support following donations",
+  "outlet": "The Center Square (via Newsline Local)",
+  "pubDate": "2026-11-18",
+  "url": "https://www.newslinelocal.com/2026/11/18/unemployment-for-workers-on-strike-gains-support-following-donations/",
+  "summary": "Reports that HB2565, which would extend unemployment benefits to striking workers, had a second amendment cleared by House Rules and gained House co-sponsors ahead of a possible veto-session floor vote. It cites a state fiscal note estimating a cost to the unemployment trust fund of $0.7 million to $1 million a year, an estimate business groups dispute, and notes the House returns Dec. 1.",
+  "itemType": "news report",
+  "topics": [
+   "il-9"
+  ],
+  "bills": [
+   "HB2565"
+  ],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-22",
+  "tier": 3
+ },
+ {
   "id": "durbin-20261118-student-loan-borrower-bill-of-rights",
   "headline": "Durbin Reintroduces Legislation To Protect Student Loan Borrowers",
   "outlet": "Office of Sen. Dick Durbin",
@@ -168,6 +212,67 @@
   "paywall": false,
   "dateCaptured": "2026-11-21",
   "tier": 1
+ },
+ {
+  "id": "capfax-20261118-its-just-a-bill-hb2565",
+  "headline": "It's just a bill",
+  "outlet": "Capitol Fax",
+  "pubDate": "2026-11-18",
+  "url": "https://capitolfax.com/2026/11/18/it%E2%80%99s-just-a-bill-369",
+  "summary": "Capitol Fax's daily bills roundup notes that HB2565, the striking-workers unemployment bill, moved to second reading in the House on Nov. 17. It summarizes objections from employer groups, including the Illinois Manufacturers' Association, about the bill's effect on the unemployment insurance trust fund.",
+  "itemType": "news report",
+  "topics": [
+   "il-9"
+  ],
+  "bills": [
+   "HB2565"
+  ],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-22",
+  "tier": 1
+ },
+ {
+  "id": "edweek-20261117-senate-gop-steady-education-funding",
+  "headline": "Senate GOP Proposes Steady Education Funding, Setting Up Budget Showdown",
+  "outlet": "Education Week",
+  "pubDate": "2026-11-17",
+  "url": "https://www.edweek.org/policy-politics/senate-gop-proposes-steady-education-funding-setting-up-budget-showdown/2026/11",
+  "summary": "Senate Republican appropriators released a fiscal 2027 Labor-HHS-Education bill that keeps most federal education programs at about current levels. That sets up negotiations with a House version that cuts more. The bill adds language requiring TRIO programs to be run in line with past practice and congressional intent, after this year's TRIO competitions drew bipartisan concern, and it gives Perkins career-technical education grants a small increase. Funding is frozen under a stopgap that runs through Dec. 11.",
+  "itemType": "news report",
+  "topics": [
+   "fed-3",
+   "fed-7"
+  ],
+  "bills": [],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": true,
+  "dateCaptured": "2026-11-21",
+  "tier": 3
+ },
+ {
+  "id": "hwh-20261117-psc-students-pioneer-book-bundle",
+  "headline": "Prairie State students call for changes to Pioneer Book Bundle",
+  "outlet": "Harvey World Herald",
+  "pubDate": "2026-11-17",
+  "url": "https://harveyworld.org/articles/education-youth/prairie-state-students-call-for-changes-to-pioneer-book-bundle/",
+  "summary": "At Prairie State College's Oct. 27 board meeting, the student trustee presented survey results on the college's automatic course-materials bundle, with students reporting trouble opting out and paying for materials some courses don't use. Administrators said ending the bundle would raise costs but they are open to changes. The board also approved a tentative 2026 property tax levy, with final levy action expected in December.",
+  "itemType": "news report",
+  "topics": [],
+  "bills": [],
+  "colleges": [
+   "Prairie State College"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-22",
+  "tier": 2
  },
  {
   "id": "bhfs-20261117-post-midterm-education",
@@ -235,15 +340,14 @@
   "tier": 3
  },
  {
-  "id": "edweek-20261117-senate-gop-steady-education-funding",
-  "headline": "Senate GOP Proposes Steady Education Funding, Setting Up Budget Showdown",
-  "outlet": "Education Week",
-  "pubDate": "2026-11-17",
-  "url": "https://www.edweek.org/policy-politics/senate-gop-proposes-steady-education-funding-setting-up-budget-showdown/2026/11",
-  "summary": "Senate Republican appropriators released a fiscal 2027 Labor-HHS-Education bill that keeps most federal education programs at about current levels. That sets up negotiations with a House version that cuts more. The bill adds language requiring TRIO programs to be run in line with past practice and congressional intent, after this year's TRIO competitions drew bipartisan concern, and it gives Perkins career-technical education grants a small increase. Funding is frozen under a stopgap that runs through Dec. 11.",
-  "itemType": "news report",
+  "id": "sac-20261116-final-five-fy2027-funding-bills",
+  "headline": "Senate Appropriations Committee Releases Final Five FY 2027 Funding Bills",
+  "outlet": "U.S. Senate Committee on Appropriations",
+  "pubDate": "2026-11-16",
+  "url": "https://www.appropriations.senate.gov/news/majority/senate-appropriations-committee-releases-final-five-fy-2027-funding-bills",
+  "summary": "The Senate Appropriations Committee released bill text, an explanatory statement and a summary for its fiscal 2027 Labor, Health and Human Services, Education, and Related Agencies bill, one of five spending bills released that day. The release describes the bill's education spending only in general terms. Program-level figures are in the linked bill documents.",
+  "itemType": "press release",
   "topics": [
-   "fed-3",
    "fed-7"
   ],
   "bills": [],
@@ -251,7 +355,7 @@
    "statewide"
   ],
   "mentionsLocal1600": false,
-  "paywall": true,
+  "paywall": false,
   "dateCaptured": "2026-11-21",
   "tier": 3
  },
@@ -274,26 +378,6 @@
   "paywall": false,
   "dateCaptured": "2026-11-21",
   "tier": 1
- },
- {
-  "id": "sac-20261116-final-five-fy2027-funding-bills",
-  "headline": "Senate Appropriations Committee Releases Final Five FY 2027 Funding Bills",
-  "outlet": "U.S. Senate Committee on Appropriations",
-  "pubDate": "2026-11-16",
-  "url": "https://www.appropriations.senate.gov/news/majority/senate-appropriations-committee-releases-final-five-fy-2027-funding-bills",
-  "summary": "The Senate Appropriations Committee released bill text, an explanatory statement and a summary for its fiscal 2027 Labor, Health and Human Services, Education, and Related Agencies bill, one of five spending bills released that day. The release describes the bill's education spending only in general terms. Program-level figures are in the linked bill documents.",
-  "itemType": "press release",
-  "topics": [
-   "fed-7"
-  ],
-  "bills": [],
-  "colleges": [
-   "statewide"
-  ],
-  "mentionsLocal1600": false,
-  "paywall": false,
-  "dateCaptured": "2026-11-21",
-  "tier": 3
  },
  {
   "id": "gomb-20261113-economic-fiscal-policy-report",
