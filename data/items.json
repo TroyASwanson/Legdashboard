@@ -148,6 +148,26 @@
   "tier": 1
  },
  {
+  "id": "tci-20261118-durbin-borrower-bill-of-rights",
+  "headline": "Durbin's Student Loan Borrower Bill Of Rights: What It Would Change For Borrowers",
+  "outlet": "The College Investor",
+  "pubDate": "2026-11-18",
+  "url": "https://thecollegeinvestor.com/92694/durbin-student-loan-borrower-bill-of-rights/",
+  "summary": "The article explains the Student Loan Borrower Bill of Rights, which Sen. Durbin and 11 Democratic cosponsors reintroduced in the Senate in November 2026. It describes proposed servicing standards for federal and private loans, including rules on how payments are applied, removing a default from credit records once it is resolved, and discharging private loans when a borrower dies or becomes disabled.",
+  "itemType": "news report",
+  "topics": [
+   "fed-1"
+  ],
+  "bills": [],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-23",
+  "tier": 3
+ },
+ {
   "id": "crs-20261118-taxing-ai-alternative-approaches",
   "headline": "Taxing AI: Alternative Approaches",
   "outlet": "Congressional Research Service",
@@ -378,6 +398,26 @@
   "paywall": false,
   "dateCaptured": "2026-11-21",
   "tier": 1
+ },
+ {
+  "id": "tci-20261115-student-loan-interest-cap-plans",
+  "headline": "Student Loan Interest Cap Plans: 0%, 2% And A 10% Credit Card Cap",
+  "outlet": "The College Investor",
+  "pubDate": "2026-11-15",
+  "url": "https://thecollegeinvestor.com/92224/student-loan-interest-credit-card-cap/",
+  "summary": "The article compares several proposals in Congress to lower federal student loan interest rates: one plan to eliminate interest, two bills setting rates near 2 percent, and a separate Senate draft capping credit card rates at 10 percent. It notes that none has become law and that bills not passed before the current Congress ends on Jan. 3, 2027 expire.",
+  "itemType": "news report",
+  "topics": [
+   "fed-1"
+  ],
+  "bills": [],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-23",
+  "tier": 3
  },
  {
   "id": "gomb-20261113-economic-fiscal-policy-report",
