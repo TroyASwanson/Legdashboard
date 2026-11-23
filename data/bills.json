@@ -380,5 +380,47 @@
   "effect": "",
   "nextStep": "A hearing or markup in the Senate Finance Committee.",
   "nextDate": ""
+ },
+ {
+  "number": "HB5319",
+  "level": "Illinois",
+  "session": "104th General Assembly",
+  "title": "Community college baccalaureate degree programs",
+  "status": "In House Rules Committee",
+  "lastAction": "Added Co-Sponsor (Apr. 17: re-referred to House Rules Committee under Rule 19(a))",
+  "lastActionDate": "2026-05-07",
+  "committee": "House Rules Committee",
+  "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=5319&GAID=18&DocTypeID=HB&GA=104&SessionID=114",
+  "topics": [
+   "il-10"
+  ],
+  "isNew": false,
+  "stage": 2,
+  "summary": "Amends the Public Community College Act so a community college board can offer applied bachelor's degree programs in fields with a documented, unmet workforce need, if the district shows it has the expertise, resources and student demand. Programs need approval from the Illinois Community College Board and the Board of Higher Education. Districts must report each year, and the state must evaluate the programs within five years.",
+  "changes": "",
+  "effect": "Any Illinois community college district could apply, including City Colleges (District 508) and the 7 suburban districts; the bill groups districts into regions.",
+  "nextStep": "Back in the House Rules Committee: Rules must approve it for floor consideration, then House second and third readings.",
+  "nextDate": "2026-12-01"
+ },
+ {
+  "number": "SB4034",
+  "level": "Illinois",
+  "session": "104th General Assembly",
+  "title": "Community college baccalaureate degree programs (Senate version)",
+  "status": "In Senate Assignments",
+  "lastAction": "Added as Co-Sponsor",
+  "lastActionDate": "2026-05-06",
+  "committee": "Senate Assignments",
+  "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=4034&GAID=18&DocTypeID=SB&GA=104&SessionID=114",
+  "topics": [
+   "il-10"
+  ],
+  "isNew": false,
+  "stage": 1,
+  "summary": "The Senate version of the community college baccalaureate bill: it would let community college boards offer applied bachelor's degree programs in high-demand fields, with state approval, annual reports and a five-year statewide evaluation.",
+  "changes": "",
+  "effect": "Any Illinois community college district could apply, including City Colleges (District 508) and the 7 suburban districts.",
+  "nextStep": "Senate Assignments must send it to a committee for a hearing.",
+  "nextDate": "2026-12-01"
  }
 ]

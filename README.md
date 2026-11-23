@@ -8,7 +8,7 @@ An automated list of information sources on the legislative topics of the Cook C
 
 - `index.html` is the whole site: the topic pages (Illinois and federal, in priority order), All sources, Archive and About.
 - `data/` holds the content the page reads:
-  - `topics.json`: the 16 topics in priority order
+  - `topics.json`: the 17 topics in priority order
   - `bills.json`: tracked bills and their latest status
   - `items.json`: source items (headline, outlet, date, link, original 2–3 sentence summary, type, topics, colleges)
   - `meta.json`: when the last scan finished
