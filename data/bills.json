@@ -13,7 +13,7 @@
    "il-2"
   ],
   "isNew": false,
-  "stage": 1,
+  "step": 1,
   "summary": "Would replace the mayor-appointed City Colleges of Chicago board of trustees with an elected board, starting with the 2027 consolidated election. The General Assembly would divide Chicago into 20 trustee districts for the board seats.",
   "changes": "",
   "effect": "City Colleges (District 508) only. City Colleges is the only community college district in Illinois without an elected board.",
@@ -34,7 +34,7 @@
    "il-3"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 3,
   "summary": "Creates the Academic Freedom of Expression Act. It states that faculty at public colleges and universities have the right to freedom in teaching, freedom in research, and freedom of expression on matters of public concern. Colleges would file their academic freedom policies with the Illinois Community College Board or the Board of Higher Education.",
   "changes": "The Senate Executive Committee passed it as amended in March 2026. Later Senate floor amendments (through No. 6) recast it as a change to the Public Higher Education Act, with policies due by July 1, 2027.",
   "effect": "All 14 colleges. Community colleges would file their policies with the Illinois Community College Board.",
@@ -55,7 +55,7 @@
    "il-4"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 3,
   "summary": "Creates the Meaningful Human Control of Artificial Intelligence Act. Public employers could not rely on automated decision-making systems for decisions about workers' employment, benefits or rights without meaningful, continuing human review. It adds transparency and bias-audit requirements, anti-retaliation protections, Department of Labor enforcement and a right to sue.",
   "changes": "Amended in the House Labor & Commerce Committee, which passed it 18–9 in March 2026.",
   "effect": "Applies to public employers; whether college districts are covered depends on the final text.",
@@ -76,7 +76,7 @@
    "il-4"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Creates the Meaningful Human Review of Artificial Intelligence Act. State agencies could not use automated decision-making systems for public benefits, individual rights or similar decisions without continuous review by a trained person who can override the system. Agencies would have to complete impact assessments first.",
   "changes": "",
   "effect": "Applies to State agencies; whether community college districts count depends on the definitions.",
@@ -97,7 +97,7 @@
    "il-5"
   ],
   "isNew": false,
-  "stage": 3,
+  "step": 4,
   "summary": "Creates the Operating Room Patient Safety Act. Surgical technologists hired or contracted by hospitals and surgical centers would have to meet education, certification or experience requirements. Some rural and safety-net facilities are exempt.",
   "changes": "",
   "effect": "Colleges that run surgical technology programs.",
@@ -118,7 +118,7 @@
    "il-6"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Appropriates $3 million from the General Revenue Fund to the Secretary of State for a recurring, permanent grant program for Illinois academic libraries. The grants would go toward open educational resources.",
   "changes": "",
   "effect": "Academic libraries, including those at the 14 colleges.",
@@ -139,7 +139,7 @@
    "il-6"
   ],
   "isNew": false,
-  "stage": 1,
+  "step": 1,
   "summary": "The Senate version of the $3 million open educational resources grant program: a recurring appropriation to the Secretary of State for grants to Illinois academic libraries.",
   "changes": "",
   "effect": "Academic libraries, including those at the 14 colleges.",
@@ -160,7 +160,7 @@
    "il-8"
   ],
   "isNew": false,
-  "stage": 3,
+  "step": 4,
   "summary": "Creates the Digital Library Protection Act. Publishers could not license e-books and digital audiobooks to libraries on terms that restrict normal library operations, such as checkout limits. Violations would count as consumer fraud, and Illinois law would govern the contracts.",
   "changes": "House Amendment No. 1 (April 2026) replaced the bill's text before the House passed it 99–0–1.",
   "effect": "Covers academic libraries, including community college libraries.",
@@ -181,7 +181,7 @@
    "il-8"
   ],
   "isNew": false,
-  "stage": 1,
+  "step": 1,
   "summary": "A companion bill making a related change to the Digital Library Protection Act. It has not moved since it was filed.",
   "changes": "",
   "effect": "",
@@ -202,7 +202,7 @@
    "il-9"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 3,
   "summary": "Changes the Unemployment Insurance Act so that workers idled by a labor dispute are ineligible for benefits for no more than 2 weeks, instead of for every week of the dispute.",
   "changes": "On Nov. 17 the House Rules Committee recommended House Floor Amendment No. 2, which would replace the bill's text.",
   "effect": "All 14 colleges; all bargaining units.",
@@ -227,7 +227,7 @@
    "fed-7"
   ],
   "isNew": false,
-  "stage": 6,
+  "step": 7,
   "summary": "The fiscal 2026 federal spending law, signed Feb. 3, 2026. It kept the maximum Pell Grant at $7,395 for 2026–27 and level-funded TRIO ($1.2 billion) and Strengthening Community Colleges Training Grants ($65 million).",
   "changes": "",
   "effect": "Student aid and federal grants at all 14 colleges.",
@@ -248,7 +248,7 @@
    "fed-1"
   ],
   "isNew": true,
-  "stage": 2,
+  "step": 2,
   "summary": "Sets servicing and disclosure standards that apply to both federal and private student loans, such as rules for how payments are handled. It lets the Education Department adjust the standards for federal loan servicers.",
   "changes": "",
   "effect": "Student loan borrowers, including students and employees at the 14 colleges.",
@@ -269,7 +269,7 @@
    "fed-5"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Would halt construction or upgrading of AI data centers nationwide until Congress passes laws giving the federal government oversight of AI, including protections for workers, consumers and communities.",
   "changes": "",
   "effect": "",
@@ -290,7 +290,7 @@
    "fed-5"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "House companion to the Artificial Intelligence Data Center Moratorium Act: a nationwide pause on new and upgraded AI data centers until federal AI safeguards become law.",
   "changes": "",
   "effect": "",
@@ -311,7 +311,7 @@
    "fed-5"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Would permanently ban building or deploying artificial superintelligence and pause the most advanced AI development until a new federal Department of AI sets safety rules. It directs the United States to seek international agreements against superintelligence.",
   "changes": "",
   "effect": "",
@@ -332,7 +332,7 @@
    "fed-5"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "House companion to the Ban Artificial Superintelligence Act: a permanent ban on artificial superintelligence, a pause on the most advanced AI development, and a new federal Department of AI.",
   "changes": "",
   "effect": "",
@@ -353,7 +353,7 @@
    "fed-6"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Would tax large AI companies on the higher of the value of AI tokens they sell or their AI product revenue, with rates that rise with unemployment. The money would fund a new Work Protection Administration in the Labor Department that awards job-creation grants.",
   "changes": "",
   "effect": "Includes added Workforce Innovation and Opportunity Act (WIOA) funding.",
@@ -374,7 +374,7 @@
    "fed-6"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 2,
   "summary": "Creates an AI Horizon Fund, paid for by taxes on the AI industry, for worker training, service jobs and support for workers whose jobs are lost to AI. A 15-member advisory council that includes labor, higher education and workforce experts would guide the spending.",
   "changes": "",
   "effect": "",
@@ -395,7 +395,7 @@
    "il-10"
   ],
   "isNew": false,
-  "stage": 2,
+  "step": 3,
   "summary": "Amends the Public Community College Act so a community college board can offer applied bachelor's degree programs in fields with a documented, unmet workforce need, if the district shows it has the expertise, resources and student demand. Programs need approval from the Illinois Community College Board and the Board of Higher Education. Districts must report each year, and the state must evaluate the programs within five years.",
   "changes": "",
   "effect": "Any Illinois community college district could apply, including City Colleges (District 508) and the 7 suburban districts; the bill groups districts into regions.",
@@ -416,7 +416,7 @@
    "il-10"
   ],
   "isNew": false,
-  "stage": 1,
+  "step": 1,
   "summary": "The Senate version of the community college baccalaureate bill: it would let community college boards offer applied bachelor's degree programs in high-demand fields, with state approval, annual reports and a five-year statewide evaluation.",
   "changes": "",
   "effect": "Any Illinois community college district could apply, including City Colleges (District 508) and the 7 suburban districts.",

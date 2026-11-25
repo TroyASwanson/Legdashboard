@@ -156,11 +156,16 @@ footer{border-top:1px solid var(--rule);background:var(--surface)}
 footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 /* bill progress and bill cards */
 .prog{display:flex;flex-direction:column;gap:4px;margin:2px 0}
-.prog-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.prog-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.prog-key{font-size:12.5px;color:var(--muted);margin:-6px 0 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.prog-key .k{display:inline-block;width:18px;height:8px;border-radius:2px;background:var(--rule);margin-left:6px}
+.prog-key .k:first-child{margin-left:0}
+.prog-key .k.done{background:var(--ink)}
+.prog-key .k.cur{background:var(--accent)}
 .prog-bar span{height:8px;border-radius:2px;background:var(--rule)}
 .prog-bar span.done{background:var(--ink)}
 .prog-bar span.cur{background:var(--accent)}
-.prog-labels{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;font-size:11.5px;line-height:1.25;color:var(--muted)}
+.prog-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:11.5px;line-height:1.25;color:var(--muted)}
 .prog-labels span.cur{color:var(--accent);font-weight:700}
 .prog-now{font-size:13px;font-weight:700;color:var(--ink)}
 .prog-now span{font-weight:500;color:var(--muted)}
@@ -257,17 +262,23 @@ function itemsLocal(){return D.items.filter(function(it){return !!it.mentionsLoc
 function itemsFor(id){return D.items.filter(function(it){return (it.topics||[]).indexOf(id)>-1;});}
 function billHref(num){return "#/bills/"+encodeURIComponent(num);}
 /* sessions and progress */
-var STAGES=["Introduced","In committee","Passed one chamber","Passed both chambers","Sent to the governor","Law"];
-function stageName(b,i){if(i===5&&b.level==="Federal")return "Sent to the president";return STAGES[i-1];}
+/* Progress: 7 steps. `step` is where the bill is now (the step it is in or waiting on):
+   1 Introduced, 2 first-chamber committee, 3 first-chamber floor, 4 second-chamber committee,
+   5 second-chamber floor, 6 governor/president, 7 law. Older data with a 1-6 `stage` is mapped. */
+var STEP_GENERIC=["Introduced","First-chamber committee","First-chamber floor","Second-chamber committee","Second-chamber floor","Governor or president","Law"];
+function firstChamber(b){var n=String(b.number||"").toUpperCase().replace(/[^A-Z]/g,"");return n.charAt(0)==="S"?"Senate":"House";}
+function stepNames(b){var f=firstChamber(b),o=f==="House"?"Senate":"House";return ["Introduced",f+" committee",f+" floor",o+" committee",o+" floor",b.level==="Federal"?"President":"Governor","Law"];}
+function stepOf(b){var s=+b.step||0;if(s>=1&&s<=7)return s;var old=+b.stage||0;return [0,1,2,4,6,6,7][old]||0;}
+function stepNow(b,s){if(s===7)return "Became law";if(s===1)return "Introduced; not yet in a committee";var n=stepNames(b)[s-1];if(s===6)return b.level==="Federal"?"With the president":"With the governor";return (s===2||s===4?"In ":"Awaiting ")+n+(s===3||s===5?" vote":"");}
 function sessionIdOf(b){for(var i=0;i<D.sessions.length;i++){var s=D.sessions[i];for(var j=0;j<(s.parts||[]).length;j++)if(s.parts[j].session===b.session)return s.id;}return "other";}
 function sessionsSorted(){return D.sessions.slice().sort(function(a,b){return a.id<b.id?1:-1;});}
 function currentSessionId(){var ss=sessionsSorted();for(var i=0;i<ss.length;i++){var id=ss[i].id;if(D.bills.some(function(b){return sessionIdOf(b)===id;}))return id;}return ss.length?ss[0].id:"other";}
 function inCurrentSession(b){return !D.sessions.length||sessionIdOf(b)===currentSessionId();}
 function progress(b,compact){
-  var st=+b.stage||0;if(st<1||st>6)return "";
-  var bar="",lab="";
-  for(var i=1;i<=6;i++){var c=i<st?"done":(i===st?"cur":"");bar+='<span class="'+c+'"></span>';lab+='<span class="'+(i===st?"cur":"")+'">'+esc(stageName(b,i))+'</span>';}
-  return '<div class="prog'+(compact?" compact":"")+'"><div class="prog-now">'+esc(stageName(b,st))+' <span>· stage '+st+' of 6</span></div><div class="prog-bar" aria-hidden="true">'+bar+'</div><div class="prog-labels" aria-hidden="true">'+lab+'</div></div>';
+  var st=stepOf(b);if(!st)return "";
+  var names=stepNames(b),bar="",lab="";
+  for(var i=1;i<=7;i++){var c=(i<st||st===7)?"done":(i===st?"cur":"");bar+='<span class="'+c+'"></span>';lab+='<span class="'+(i===st?"cur":"")+'">'+esc(names[i-1])+'</span>';}
+  return '<div class="prog'+(compact?" compact":"")+'"><div class="prog-now">'+esc(stepNow(b,st))+' <span>· step '+st+' of 7</span></div><div class="prog-bar" role="img" aria-label="'+esc(stepNow(b,st))+', step '+st+' of 7">'+bar+'</div><div class="prog-labels" aria-hidden="true">'+lab+'</div></div>';
 }
 function nextText(b){
   if(!b.nextStep)return "";
@@ -499,9 +510,10 @@ function viewBills(focus){
     var h='<h2 class="group-h">'+esc(heading)+(part?' · '+esc(part.session):'')+'</h2>';
     if(part&&part.note)h+='<p class="note-box" style="margin:0 0 12px">'+esc(part.note)+'</p>';
     if(!list.length)return h+'<div class="empty">No '+esc(level)+' bills are tracked for this session.</div>';
-    var counts=[0,0,0,0,0,0,0];list.forEach(function(b){var st=+b.stage||0;if(st>=1&&st<=6)counts[st]++;});
-    var cl=[];for(var i=1;i<=6;i++)if(counts[i])cl.push(esc(stageName({level:level},i))+' <b>'+counts[i]+'</b>');
-    if(cl.length)h+='<p class="stagecounts">By stage: '+cl.join(" · ")+'</p>';
+    var counts=[0,0,0,0,0,0,0,0];list.forEach(function(b){var st=stepOf(b);if(st)counts[st]++;});
+    var gen=STEP_GENERIC.slice();gen[5]=level==="Federal"?"President":"Governor";
+    var cl=[];for(var i=1;i<=7;i++)if(counts[i])cl.push(esc(gen[i-1])+' <b>'+counts[i]+'</b>');
+    if(cl.length)h+='<p class="stagecounts">Where they are now: '+cl.join(" · ")+'</p><p class="prog-key"><span class="k done"></span>Done <span class="k cur"></span>Where it is now <span class="k"></span>Still ahead</p>';
     return h+'<div class="bgrid">'+list.map(function(b){return billCard(b,focus);}).join("")+'</div>';
   }
   var inSess=D.bills.filter(function(b){return sessionIdOf(b)===billSession;});
