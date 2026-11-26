@@ -154,6 +154,9 @@ a.tag:hover{border-color:var(--accent)}
 .facts b{font-weight:700}
 footer{border-top:1px solid var(--rule);background:var(--surface)}
 footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+footer .foot-links{flex-basis:100%}
+footer .foot-links a{color:var(--muted);text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;min-height:24px}
+footer .foot-links a:hover{color:var(--ink)}
 /* bill progress and bill cards */
 .prog{display:flex;flex-direction:column;gap:4px;margin:2px 0}
 .prog-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
@@ -230,6 +233,7 @@ footer .wrap{padding-top:16px;padding-bottom:20px;font-size:14px;color:var(--mut
 <footer><div class="wrap">
   <span>This dashboard is the result of an automated search. Sources are not approved or endorsed by CCCTU Local 1600.</span>
   <span id="foot-updated"></span>
+  <span class="foot-links"><a href="https://troyaswanson.github.io/LegEventLandingPage/" rel="noopener">Political action events</a></span>
 </div></footer>
 
 <script>
