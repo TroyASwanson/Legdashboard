@@ -148,26 +148,6 @@
   "tier": 1
  },
  {
-  "id": "tci-20261118-durbin-borrower-bill-of-rights",
-  "headline": "Durbin's Student Loan Borrower Bill Of Rights: What It Would Change For Borrowers",
-  "outlet": "The College Investor",
-  "pubDate": "2026-11-18",
-  "url": "https://thecollegeinvestor.com/92694/durbin-student-loan-borrower-bill-of-rights/",
-  "summary": "The article explains the Student Loan Borrower Bill of Rights, which Sen. Durbin and 11 Democratic cosponsors reintroduced in the Senate in November 2026. It describes proposed servicing standards for federal and private loans, including rules on how payments are applied, removing a default from credit records once it is resolved, and discharging private loans when a borrower dies or becomes disabled.",
-  "itemType": "news report",
-  "topics": [
-   "fed-1"
-  ],
-  "bills": [],
-  "colleges": [
-   "statewide"
-  ],
-  "mentionsLocal1600": false,
-  "paywall": false,
-  "dateCaptured": "2026-11-23",
-  "tier": 3
- },
- {
   "id": "crs-20261118-taxing-ai-alternative-approaches",
   "headline": "Taxing AI: Alternative Approaches",
   "outlet": "Congressional Research Service",
@@ -232,6 +212,26 @@
   "paywall": false,
   "dateCaptured": "2026-11-21",
   "tier": 1
+ },
+ {
+  "id": "tci-20261118-durbin-borrower-bill-of-rights",
+  "headline": "Durbin's Student Loan Borrower Bill Of Rights: What It Would Change For Borrowers",
+  "outlet": "The College Investor",
+  "pubDate": "2026-11-18",
+  "url": "https://thecollegeinvestor.com/92694/durbin-student-loan-borrower-bill-of-rights/",
+  "summary": "The article explains the Student Loan Borrower Bill of Rights, which Sen. Durbin and 11 Democratic cosponsors reintroduced in the Senate in November 2026. It describes proposed servicing standards for federal and private loans, including rules on how payments are applied, removing a default from credit records once it is resolved, and discharging private loans when a borrower dies or becomes disabled.",
+  "itemType": "news report",
+  "topics": [
+   "fed-1"
+  ],
+  "bills": [],
+  "colleges": [
+   "statewide"
+  ],
+  "mentionsLocal1600": false,
+  "paywall": false,
+  "dateCaptured": "2026-11-23",
+  "tier": 3
  },
  {
   "id": "capfax-20261118-its-just-a-bill-hb2565",

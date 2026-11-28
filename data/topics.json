@@ -15,5 +15,5 @@
 {"id":"fed-4","level":"Federal","rank":4,"name":"Workforce Grants","description":"Federal workforce training grants.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""},
 {"id":"fed-5","level":"Federal","rank":5,"name":"AI Federal Regulation","description":"Federal rules on AI, including any preemption of state AI laws.","colleges":"All 14 colleges","bills":["S. 4214","H.R. 9442","S. 5493","H.R. 10538"],"billNote":"Great American AI Act discussion draft has no number yet"},
 {"id":"fed-6","level":"Federal","rank":6,"name":"AI Token Tax","description":"Proposals for a federal tax on AI usage (tokens).","colleges":"All 14 colleges","bills":["H.R. 10044","S. 5518"],"billNote":""},
-{"id":"fed-7","level":"Federal","rank":7,"name":"Higher Education Policy Overview","description":"General federal higher-ed policy, including Department of Education actions.","colleges":"All 14 colleges","bills":["H.R. 7148"],"billNote":""}
+{"id":"fed-7","level":"Federal","rank":7,"name":"Higher Education Policy Overview","description":"General federal higher-ed policy, including Department of Education actions.","colleges":"All 14 colleges","bills":["H.R. 7148","S. 5665","H.R. 10672"],"billNote":""}
 ]

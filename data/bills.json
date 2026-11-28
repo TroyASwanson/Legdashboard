@@ -422,5 +422,47 @@
   "effect": "Any Illinois community college district could apply, including City Colleges (District 508) and the 7 suburban districts.",
   "nextStep": "Senate Assignments must send it to a committee for a hearing.",
   "nextDate": "2026-12-01"
+ },
+ {
+  "number": "S. 5665",
+  "level": "Federal",
+  "session": "119th Congress",
+  "title": "America's College Promise Act of 2026",
+  "status": "In Senate HELP Committee",
+  "lastAction": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions",
+  "lastActionDate": "2026-09-30",
+  "committee": "Senate HELP",
+  "url": "https://www.congress.gov/bill/119th-congress/senate-bill/5665",
+  "topics": [
+   "fed-7"
+  ],
+  "isNew": true,
+  "step": 2,
+  "summary": "Would create a federal-state partnership that gives grants to participating states to waive tuition and fees at community colleges for eligible students, with states contributing matching funds.",
+  "changes": "",
+  "effect": "Students at public community colleges, including the 14 colleges, if Illinois chose to participate.",
+  "nextStep": "A hearing or markup in the Senate Health, Education, Labor, and Pensions Committee.",
+  "nextDate": ""
+ },
+ {
+  "number": "H.R. 10672",
+  "level": "Federal",
+  "session": "119th Congress",
+  "title": "America's College Promise Act of 2026",
+  "status": "In House committee",
+  "lastAction": "Referred to the House Committee on Education and Workforce",
+  "lastActionDate": "2026-10-01",
+  "committee": "House Education and Workforce",
+  "url": "https://www.congress.gov/bill/119th-congress/house-bill/10672",
+  "topics": [
+   "fed-7"
+  ],
+  "isNew": true,
+  "step": 2,
+  "summary": "Would create a federal-state partnership that gives grants to participating states to waive tuition and fees at community colleges for eligible students, with states contributing matching funds.",
+  "changes": "",
+  "effect": "Students at public community colleges, including the 14 colleges, if Illinois chose to participate.",
+  "nextStep": "A hearing or markup in the House Education and Workforce Committee.",
+  "nextDate": ""
  }
 ]
